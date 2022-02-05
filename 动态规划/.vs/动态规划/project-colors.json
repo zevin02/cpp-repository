@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "2f13b522-8480-4b2c-8768-9ec07cbbe8e6": {
+      "ProjectGuid": "2f13b522-8480-4b2c-8768-9ec07cbbe8e6",
+      "DisplayName": "动态规划",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
