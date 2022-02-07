@@ -1,0 +1,14 @@
+﻿  main.cpp
+E:\governcode\c++stl速成\main.cpp(146,18): error C2672: “unique”: 未找到匹配的重载函数
+E:\governcode\c++stl速成\main.cpp(146,61): error C2782: “_FwdIt std::unique(_FwdIt,_FwdIt)”: 模板 参数“_FwdIt”不明确
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\algorithm(3830): message : 参见“std::unique”的声明
+E:\governcode\c++stl速成\main.cpp(146,61): message : 可能是“__int64”
+E:\governcode\c++stl速成\main.cpp(146,61): message : 或    “std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>”
+          with
+          [
+              _Ty=int
+          ]
+E:\governcode\c++stl速成\main.cpp(146,61): error C2784: “_FwdIt std::unique(_FwdIt,_FwdIt)”: 未能从“__int64”为“_FwdIt”推导 模板 参数
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\algorithm(3830): message : 参见“std::unique”的声明
+E:\governcode\c++stl速成\main.cpp(146,61): error C2780: “_FwdIt std::unique(_FwdIt,_FwdIt,_Pr)”: 应输入 3 个参数，却提供了 2 个
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\algorithm(3805): message : 参见“std::unique”的声明
