@@ -1,0 +1,7 @@
+﻿  test.cpp
+E:\governcode\模板\test.cpp(109,8): error C2955: “Stack”: 使用 类 模板 需要 模板 参数列表
+E:\governcode\模板\test.cpp(88): message : 参见“Stack”的声明
+E:\governcode\模板\test.cpp(109,13): error C2514: “Stack”: 无法构建类模板
+E:\governcode\模板\test.cpp(88): message : 参见“Stack”的声明
+E:\governcode\模板\test.cpp(110,13): error C2514: “Stack”: 无法构建类模板
+E:\governcode\模板\test.cpp(88): message : 参见“Stack”的声明
