@@ -106,6 +106,7 @@ void operatoracess()
 
 }
 
+//对字符串进行尾部添加字符或字符串
 void add()
 {
 	string s;
@@ -116,6 +117,7 @@ void add()
 }
 
 
+//只交换字符
 class Solution {
 public:
 	bool isletter(char ch)
