@@ -1,0 +1,3 @@
+﻿  test.cpp
+E:\governcode\stl\string\test.cpp(120,35): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  string.vcxproj -> E:\governcode\stl\string\x64\Debug\string.exe
