@@ -87,13 +87,13 @@ public:
 //int main()
 //{
 //	//c
-//	struct ListNode* n1 = (struct ListNode*)malloc(sizeof(ListNode));
-//	n1->prev = nullptr;
-//	n1->next = nullptr;
-//	n1->_val = 0;
-//
-//	//cpp
-//	ListNode* n2 = new ListNode(0);//更加容易
+	//struct ListNode* n1 = (struct ListNode*)malloc(sizeof(ListNode));
+	//n1->prev = nullptr;
+	//n1->next = nullptr;
+	//n1->_val = 0;
+
+	////cpp
+	//ListNode* n2 = new ListNode(0);//更加容易
 //
 //	//现在就不用在malloc之后调用init和destroy会自动自己调用
 //	Stack* s1 = new Stack;//会自动调用构造函数和开空间，
