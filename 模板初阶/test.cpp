@@ -55,29 +55,29 @@ t add(const t& a, const t& b)
 }
 
 
-//template<class T1,class T2,class T3>
-//T1 add(const T2& a, const T3& b)
-//{
-//	return a + b;
-//}
+template<class T1,class T2,class T3>
+T1 add(const T2& a, const T3& b)
+{
+	return a + b;
+}
 
 
-//int main()
-//{
-//	int a = 1, b = 2;
-//	double c = 1.1, d = 2.3;
-//	cout << add(a, b) << endl;
-//	cout << add(c, d) << endl;
-//	//如果要对于a和d加,不可以直接弄
-//	//1.强制转
-//cout<<add((double)a, d)<<endl;//这些都是自己推
-// 
-////2.显示实例化
-//cout << add<int>(a, d) << endl;//指定我们要实例化的类型，指定t用int类型
-//cout << add<double>(a, d) << endl;
-//cout << add(c, d) << endl;
-//	return 0;
-//}
+int main()
+{
+	int a = 1, b = 2;
+	double c = 1.1, d = 2.3;
+	cout << add(a, b) << endl;
+	cout << add(c, d) << endl;
+	//如果要对于a和d加,不可以直接弄
+	//1.强制转
+cout<<add((double)a, d)<<endl;//这些都是自己推
+ 
+//2.显示实例化
+cout << add<int>(a, d) << endl;//指定我们要实例化的类型，指定t用int类型
+cout << add<double>(a, d) << endl;
+cout << add(c, d) << endl;
+	return 0;
+}
 
 //类的模板，语法也是类似的
 template<class t1>
@@ -102,12 +102,25 @@ public:
 		delete[] _a;
 		_a = nullptr;
 	}
+
+	void Push(const t1& m);
 };
+
+template<class t1>
+
+void Stack<t1>::Push(const t1& m)//要指定类模板
+{
+
+}
 
 int main()
 {
-	Stack st1(2);//存int
-	Stack st2(2);//存double
+	//类模板不支持参数类型的推演，只支持显示实例化的指定
+	Stack<int> st1(2);//存int
+	Stack <double>st2(2);//存double
+	Stack<int*>st3;
+	Stack<char>st4;
+	st1.Push(1);
 
 	return 0;
 }
