@@ -87,7 +87,9 @@ void func()
 }
 
 
-//char& operator[] (size_t pos);这里的引用返回是因为这个数组是在堆上开辟的，出了作用域还在，并且可以对其中的字符进行修改，还可以减少拷贝（不是主要目的）
+//char& operator[] (size_t pos);这里的引用返回是因为这个数组是在堆上开辟的，出了作用域还在，并且可以对其中的字符进行修改，或者调用，还可以减少拷贝（不是主要目的）
+
+
 void operatoracess()
 {
 	string s1("hello world");
@@ -158,6 +160,88 @@ public:
 	}
 
 };
+
+//遍历，1.迭代器2.范围for
+void test_string1()
+{
+  
+string s1("hello");
+string::iterator it=s1.begin();//s1.begin(),是第一个数据的地址，s1.end（）是最后一个数据的后一个的地址
+//这个iterator是定义在string里面，it现在指向了第一个数据的地址
+//现在可以先想象成一个像指针一样的类型
+//
+while(it!=s1.end())//直到结尾就结束了，但是不建议用<
+{
+  cout<<*it<<" ";//*就是取他的数据
+  ++it;//到下一个地址
+}
+cout<<endl;
+//除了可以读还可以写
+ it=s1.begin();//s1.begin(),是第一个数据的地址，s1.end（）是最后一个数据的后一个的地址
+//这个iterator是定义在string里面，it现在指向了第一个数据的地址
+//现在可以先想象成一个像指针一样的类型
+//
+while(it!=s1.end())//直到结尾就结束了
+{
+  *it-=1;//*就是取他的数据
+  ++it;//到下一个地址
+}
+cout<<endl;
+
+
+//范围for,auto可以自动识别
+for(auto e:s1)//把s1里面每个字符取出来赋值给e，不需要自己++，自动判断结束
+{
+  cout<<e<<" ";
+}
+cout<<endl;
+
+//要修改就要用引用
+for(auto& e:s1)
+{
+  e-=1;
+}
+cout<<endl;
+
+//反向迭代器
+//倒着遍历
+string::reverse_iterator rit=s1.rbegin();//rbegin（），是最后一个数据的地址
+//为了简化代码也可以直接auto推到
+//
+//auto  rit=s1.rbegin()
+//
+while(rit!=s1.rend())//rend（）是第一个数据的前一个地址
+{
+  cout<<*rit<<" ";//olleh，反过来遍历
+  ++rit;//反向迭代器的++，是往左走的
+}
+cout<<endl;
+
+//迭代器遍历的意义是什么呢：所有的容器都可以用迭代器这种访问修改
+//1.对于string类来说，利用[]都足够好用,确实可以不用迭代器
+//2。对于其他容器（数据结构）也可以使用，如list，map，set，这些是不支持[]，因为只有像数组一样的东西才支持[]遍历和下标，
+//结论：：对于string得会用迭代器，但是我们还是喜欢下标加[],
+
+//还有const迭代器，普通迭代器是可读可写的
+string cstr("hello world");
+//funcion(cstr);
+string::const_iterator re=s1.begin();//只读不写，同理还有反向迭代器
+//cbegin（）就是const迭代器，但是我们平时都不太用，
+
+}
+
+
+
+//
+void test_string3()
+{
+string s1;
+s1.reserve(100);//可以设置容量的大小，容量就是100，加上原来的容量
+
+}
+
+
+
 int main()
 {
 	init();
@@ -167,5 +251,26 @@ int main()
 	Solution sl;
 
 	sl.reverseOnlyLetters("Test1ng-Leet=code-Q!");
-	return 0;
+test_string1();
+test_string3();
+  return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
