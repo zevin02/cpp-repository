@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+#include<cstdio>
 //string就是管理字符串的类
 #include<string>
 
@@ -190,17 +190,17 @@ cout<<endl;
 
 
 //范围for,auto可以自动识别
-for(auto e:s1)//把s1里面每个字符取出来赋值给e，不需要自己++，自动判断结束
-{
-  cout<<e<<" ";
-}
+//for(auto e:s1)//把s1里面每个字符取出来赋值给e，不需要自己++，自动判断结束
+//{
+//  cout<<e<<" ";
+//}
 cout<<endl;
 
 //要修改就要用引用
-for(auto& e:s1)
-{
-  e-=1;
-}
+//for(auto& e:s1)
+//{
+//  e-=1;
+//}
 cout<<endl;
 
 //反向迭代器
@@ -232,27 +232,65 @@ string::const_iterator re=s1.begin();//只读不写，同理还有反向迭代器
 
 
 
-//
+//对于容量的函数
 void test_string3()
 {
 string s1;
 s1.reserve(100);//可以设置容量的大小，容量就是100，加上原来的容量
+string s2;
+s2.resize(100,'x');//也是可以设置容量的大小，同时还可以对其进行初始化，如将s1有效数据的后面全部设置成x，如果没有第二个参数，则默认是‘\0’
+}
+
+
+
+
+
+//对于
+void test_string2()
+{
+
+string s2="hello world";
+cout<<s2.c_str()<<endl;//将string转变成c语言的形式字符串，char*，以\0截至
+string file("test.txt");
+//我们要以c语言的形式打开一个文件
+FILE* fout=fopen(s2.c_str(),"w"); //fopen第一个参数是char*，所以用这函数
+
+//要求取出文件的后缀
+
+  size_t pos=file.find('.');//在file里面查找‘x’的位置，find的返回值是size_t,下标从0开始，查找第一个符合的坐标，否则就返回-1
+  
+string s1(file,pos);
+cout<<s1<<endl;
+if(pos!=string::npos)
+{
+  string suffix=file.substr(pos);
+cout<<suffix<<endl;
+}
+
+
+
+
+
 
 }
 
 
 
+
+
+
 int main()
 {
-	init();
-	func();
-	operatoracess();
-	add();
-	Solution sl;
+//	init();
+//	func();
+//	operatoracess();
+//	add();
+//	Solution sl;
 
-	sl.reverseOnlyLetters("Test1ng-Leet=code-Q!");
-test_string1();
-test_string3();
+//	sl.reverseOnlyLetters("Test1ng-Leet=code-Q!");
+//test_string1();
+//test_string3();
+test_string2();
   return 0;
 }
 
