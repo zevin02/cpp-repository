@@ -39,9 +39,9 @@ private:
 
 void init()
 {
-	string s1;
-	string s2("hello world");
-	string s3(s2);
+	string s1;//无调用构造函数
+	string s2("hello world");//构造函数
+	string s3(s2);//拷贝构造
 	//cin >> s1;
 	cout << s1 << endl;
 	cout << s2 << endl;
@@ -53,9 +53,9 @@ void init()
 
 
 	string s4(s2, 2, 6);
-	cout << s4 << endl;
-	string s5(s2, 2);
-	cout << s5 << endl;
+	cout << s4 << endl;//llo wo
+	string s5(s2, 2);//默认从坐标为2的地方往后截取所有的s2
+	cout << s5 << endl;//ello world
 
 	//string (const char* s, size_t n);
 	string s7("hello world", 3);//取前3个字符
@@ -100,7 +100,7 @@ void operatoracess()
 	for (size_t i = 0; i < s1.length(); i++)
 	{
 		s1.at(i) -= 1;//和上面是一样的
-		cout << s1.at(i) << endl;//at是抛异常检查错误
+		cout << s1.at(i) << endl;//at是抛异常检查错误,建议还是使用[ ]
 	}
 	cout << endl;
 
@@ -112,15 +112,17 @@ void add()
 	string s;
 	s.push_back('a');
 	s.append("bcde");//尾插bcd
-	cout << s << endl;
-	s += '!';//也可以利用运算符重载进行实现尾插，推荐
+	cout << s << endl;//abcd
+	s += '!';//也可以利用运算符重载进行实现尾插，推荐,abcd!
 }
 
 
 //只交换字符
+//abc-bcd-qwlkj变成 jkl-wqd-cbcba  
+//
 class Solution {
 public:
-	bool isletter(char ch)
+	bool isletter(char ch)//判断是否为字母
 	{
 		if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
 			return true;
@@ -128,24 +130,24 @@ public:
 
 	}
 	string reverseOnlyLetters(string s) {
-		int begin = 0, end = s.size() - 1;
-		while (begin <= end)
+		int begin = 0, end = s.size() - 1;//利用双指针法进行操作
+		while (begin <= end)//两者相遇那就停止了
 		{
-			if (isletter(s[begin]) && isletter(s[end]))//yes
+			if (isletter(s[begin]) && isletter(s[end]))//yes,前后两个都是字母
 			{
 				swap(s[begin], s[end]);
-				begin++;
+				begin++;//
 				end--;
 			}
-			else if (isletter(s[begin]) && (!isletter(s[end])))
+			else if (isletter(s[begin]) && (!isletter(s[end])))//前面是，后面不是
 			{
 				end--;
 			}
-			else if (!isletter(s[begin]) && isletter(s[end]))
+			else if (!isletter(s[begin]) && isletter(s[end]))//前不是，后是
 			{
-				begin++;
+				begin++;//begin往后走
 			}
-			else
+			else//都不是，begin往后走，end往前走
 			{
 				begin++;
 				end--;
