@@ -245,7 +245,7 @@ s2.resize(100,'x');//Ò²ÊÇ¿ÉÒÔÉèÖÃÈİÁ¿µÄ´óĞ¡£¬Í¬Ê±»¹¿ÉÒÔ¶ÔÆä½øĞĞ³õÊ¼»¯£¬Èç½«s1ÓĞĞ
 
 
 
-//¶ÔÓÚ
+//¶ÔÓÚfind£¬c_str ,rfindµÄÈÏÊ¶ÓëÀí½â
 void test_string2()
 {
 
@@ -267,9 +267,24 @@ if(pos!=string::npos)
 cout<<suffix<<endl;
 }
 
+//rfind()//¿ÉÒÔ´ÓºóÃæÍêÇ°ÕÒ£¬ÕÒµ½µÚÒ»¸ö.£¬·½±ãÕÒºó×ºÃû
+//https://blog.csdn.net/m0_61567378?spm=1000.2115.3001.5343
+string url("http://blog.csdn.net/m0_61567378?spm=1000.2115.3001.5343");
+//ÕÒĞ­ÒéÍ·
+size_t pos1=url.find(':');//£ºÇ°ÃæµÄ¾ÍÊÇĞ­ÒéÍ·
 
+string protocol=url.substr(0,pos1-0);//È¡µÃ×Ö´®¾ÍÊÇ´Ó0¿ªÊ¼£¬µ½pos1Î»ÖÃ£¬³¤¶ÈÎªpos1µÄ×Ö´®£¬Ò²¾ÍÊÇhttp
+cout<<protocol<<endl;
 
+//ÕÒÓòÃû£¬
+size_t pos2=url.find('/',pos1+3);//findÄ¬ÈÏ´Ó0¿ªÊ¼ÕÒ£¬ÏÖÔÚÎÒÃÇ¸ø¶¨Ëû´Ópos1+3Î»ÖÃ´¦¿ªÊ¼ÕÒ£¬Ò²¾ÍÊÇb¿ªÊ¼£¬ÍùºóÕÒ£¬ÕÒµ½/µÄÎ»ÖÃ
 
+string domain=url.substr(pos1+3,pos2-pos1-3);
+cout<<domain<<endl;
+
+//Í³Ò»×ÊÔ´¶¨Î»
+string uri=url.substr(pos2+1);
+cout<<uri<<endl;
 
 
 }
