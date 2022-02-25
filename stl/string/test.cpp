@@ -159,6 +159,32 @@ public:
 		return s;
 	}
 
+
+  //计算最后一个单词的长度如“hello world  ”g
+
+  int lengthOfLastWord(string s) {
+            int end=s.size()-1;
+                    while(s[end]==' ')
+                    {
+                                  s.erase(end,1);//无法使用
+                                              end--;
+                                                      
+                                                      
+                    }
+                            
+                    size_t pos=s.rfind(" ");
+
+                    string sub=s.substr(pos+1);
+                    return sub.size();
+
+
+
+                        
+  }
+
+
+
+
 };
 
 //遍历，1.迭代器2.范围for
@@ -291,7 +317,32 @@ cout<<uri<<endl;
 
 
 
+//
+void test_string4()
+{
 
+//insert不太推荐用,O(n),效率低
+
+  string s="hell";
+  s.insert(0,"owlod");//在头上插入一个owlod，是从第0个位置往后插入
+  s.insert(0,1,'x');//在头上插入一个x,是
+  s.insert(4,"xx");//从第4个位置往后插入xx
+  cout<<s<<endl;
+
+  //要挪动数据效率很低，
+  s.erase(4,2);//从4位置，删除两个长度的字符
+  cout<<s<<endl;
+  s.erase(s.size()-1,1);//尾删
+  s.erase(3);//第二个参数不给值就后面全部都删除了
+
+  //尾删也可以
+//s.pop_back();
+
+//输入一整行的数据，包括‘ ’
+getline(cin,s);//第一个参数是流 
+
+
+}
 
 
 int main()
@@ -305,8 +356,14 @@ int main()
 //	sl.reverseOnlyLetters("Test1ng-Leet=code-Q!");
 //test_string1();
 //test_string3();
-test_string2();
-  return 0;
+//test_string2();
+//test_string4();
+Solution ts;
+string s="hello world  ";
+int k=ts.lengthOfLastWord(s);
+cout<<k<<endl;
+return 0;
+
 }
 
 
