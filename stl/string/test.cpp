@@ -279,7 +279,7 @@ string s2="hello world";
 cout<<s2.c_str()<<endl;//将string转变成c语言的形式字符串，char*，以\0截至
 string file("test.txt");
 //我们要以c语言的形式打开一个文件
-FILE* fout=fopen(s2.c_str(),"w"); //fopen第一个参数是char*，所以用这函数
+//FILE* fout=fopen(s2.c_str(),"w"); //fopen第一个参数是char*，所以用这函数
 
 //要求取出文件的后缀
 
@@ -373,10 +373,52 @@ void test_string6()
 string s=to_string(123456);
 
 
+  string str = to_string(12.345);
+
 }
 
 
+bool isletter(char c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c < '10' && c >='0'))
+	{
+		return true;
+	}
+	return false;
+}
 
+//验证回文
+bool isPalindrome(string s) {
+	string s1;
+	auto it = s.begin();
+	while (it != s.end())
+	{
+		if (isletter(*it))
+		{
+			if (((*it) >= 'A' && (*it) <= 'Z'))
+			{
+				(*it) += 32;
+			}
+			s1 += (*it);
+			it++;
+		}
+		else
+		{
+			it++;
+		}
+	}
+	cout << s1 << endl;
+	string s2 = s1;
+	reverse(s1.begin(), s1.end());
+	if (s2 == s1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 
 int main()
@@ -396,7 +438,12 @@ Solution ts;
 string s="hello world  ";
 //int k=ts.lengthOfLastWord(s);
 //cout<<k<<endl;
-test_string6();
+//test_string6();
+
+string s1 = "A man, a plan, a canal: Panama";
+;
+isPalindrome(s1);
+
 return 0;
 
 }
