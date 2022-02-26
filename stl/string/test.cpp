@@ -359,14 +359,19 @@ void test_string5()
 
 
 
-//字符串转整形
+//字符串与整形的转化
 
 
 void test_string6()
 {
 
-  int val=stoi("1234");
-  cout<<val<<endl;
+  int val=stoi("1234");//转变成int
+  cout<<val<<endl;//1234
+  double val1=stod("123");
+  //转变成字符串
+  string str=to_string(12.345);
+string s=to_string(123456);
+
 
 }
 
