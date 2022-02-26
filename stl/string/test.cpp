@@ -124,42 +124,6 @@ void add()
 //
 class Solution {
 public:
-	bool isletter(char ch)//判断是否为字母
-	{
-		if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
-			return true;
-		else return false;
-
-	}
-	string reverseOnlyLetters(string s) {
-		int begin = 0, end = s.size() - 1;//利用双指针法进行操作
-		while (begin <= end)//两者相遇那就停止了
-		{
-			if (isletter(s[begin]) && isletter(s[end]))//yes,前后两个都是字母
-			{
-				swap(s[begin], s[end]);
-				begin++;//
-				end--;
-			}
-			else if (isletter(s[begin]) && (!isletter(s[end])))//前面是，后面不是
-			{
-				end--;
-			}
-			else if (!isletter(s[begin]) && isletter(s[end]))//前不是，后是
-			{
-				begin++;//begin往后走
-			}
-			else//都不是，begin往后走，end往前走
-			{
-				begin++;
-				end--;
-			}
-
-		}
-		return s;
-	}
-
-
   //计算最后一个单词的长度如“hello world  ”g
 
   int lengthOfLastWord(string s) {
@@ -378,47 +342,40 @@ string s=to_string(123456);
 }
 
 
-bool isletter(char c)
+//浅拷贝，完成值拷贝，将每个字节一起拷贝
+//对于指针类型的就不可以靠浅拷贝
+//浅拷贝抄作业连名字都没改，完完全全的抄
+//深拷贝就是抄作业改了名字，不完全的抄
+//
+
+classm  my_string 
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c < '10' && c >='0'))
-	{
-		return true;
-	}
-	return false;
+  private:
+    char* _str;
+  public:
+    //构造函数
+    my_string(const char* str)
+    :_str(new char[strlen(str)+1])
+    {
+strcpy(_str,str);
+    }
+
+    //拷贝构造要用深拷贝
+    my_string(const my_string& s)
+      :_str(new char[strlen(str)+1])
+    {
+      strcpy(_str,s.str);
+    }
+
 }
 
-//验证回文
-bool isPalindrome(string s) {
-	string s1;
-	auto it = s.begin();
-	while (it != s.end())
-	{
-		if (isletter(*it))
-		{
-			if (((*it) >= 'A' && (*it) <= 'Z'))
-			{
-				(*it) += 32;
-			}
-			s1 += (*it);
-			it++;
-		}
-		else
-		{
-			it++;
-		}
-	}
-	cout << s1 << endl;
-	string s2 = s1;
-	reverse(s1.begin(), s1.end());
-	if (s2 == s1)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+void test_string7()
+{
+
+
 }
+
+
 
 
 int main()
@@ -441,7 +398,7 @@ string s="hello world  ";
 //test_string6();
 
 string s1 = "A man, a plan, a canal: Panama";
-;
+
 isPalindrome(s1);
 
 return 0;
