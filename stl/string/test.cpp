@@ -345,6 +345,35 @@ getline(cin,s);//第一个参数是流
 }
 
 
+
+void test_string5()
+{
+
+  string s1="hello";
+  string s2="string";
+  cout<<(s1<s2)<<endl;//h<s所以就是小于
+
+  cout<<("hello"<s2)<<endl;//char*的也可以比较
+  cout<<(string("hello")<s2)<<endl;//这样也是可以的
+}
+
+
+
+//字符串转整形
+
+
+void test_string6()
+{
+
+  int val=stoi("1234");
+  cout<<val<<endl;
+
+}
+
+
+
+
+
 int main()
 {
 //	init();
@@ -360,8 +389,9 @@ int main()
 //test_string4();
 Solution ts;
 string s="hello world  ";
-int k=ts.lengthOfLastWord(s);
-cout<<k<<endl;
+//int k=ts.lengthOfLastWord(s);
+//cout<<k<<endl;
+test_string6();
 return 0;
 
 }
