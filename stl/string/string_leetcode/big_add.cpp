@@ -1,7 +1,16 @@
+//大数相加
+//12334+23
+//
+
+#include<iostream>
+using namespace std;
+#include<string>
+
+
 class Solution {
   public:
     string addStrings(string num1, string num2) {
-      int end1=num1.size()-1;
+      int end1=num1.size()-1;//最后一位
       int end2=num2.size()-1;
       int next=0;//进位
       string retstr;
@@ -51,3 +60,21 @@ class Solution {
     }
 
 };
+
+
+void test()
+{
+  Solution st;
+  string num1="1231";
+  string num2="1111";
+
+  string ret=st.addStrings(num1,num2);
+  cout<<ret<<endl;
+  
+}
+
+int main()
+{
+test();
+  return 0;
+}
