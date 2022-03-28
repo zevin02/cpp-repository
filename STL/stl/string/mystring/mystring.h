@@ -22,11 +22,16 @@ namespace xzw
             strcpy(_str, s._str);
         }
         //align，赋值运算符
-        string&operator=(const string &s)//我们也要自己写，不然就是浅拷贝
+        string &operator=(const string &s) //我们也要自己写，不然就是浅拷贝，还要考虑自己给自己赋值
         {
-            strcpy(this->_str,s._str);
-            return *this;
+            if (strcmp(this->_str,s._str)!=0)
+            {
+                delete[] this->_str; //先把原来的空间给释放调，再重新开辟一块空间
+                this->_str = new char[strlen(s._str) + 1];
 
+                strcpy(this->_str, s._str);
+            }
+            return *this;
         }
         ~string() //析构函数
         {
@@ -41,7 +46,7 @@ namespace xzw
         //我们不能在同一块空间
         string s2(s);
         string s3("sortt");
-        s=s3;
+        s = s3; //如果我们不写就是浅拷贝，连着地址一起拷贝过去了，s内存还没有释放，内存泄漏
         printf("hello\n");
     }
 }
