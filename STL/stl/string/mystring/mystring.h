@@ -8,6 +8,8 @@ namespace xzw
     {
     private:
         char *_str;
+        size_t size;
+        size_t capacit;
 
     public:
         string(const char *str) //构造函数
@@ -21,17 +23,25 @@ namespace xzw
         {
             strcpy(_str, s._str);
         }
-        //align，赋值运算符
+        //assign，赋值运算符
         string &operator=(const string &s) //我们也要自己写，不然就是浅拷贝，还要考虑自己给自己赋值
         {
-            if (strcmp(this->_str,s._str)!=0)
+            //如果自己给自己赋值，要拷贝的东西被我们毁掉，就没办法操作了
+            // if (this!=&s)
+            // {
+            //     delete[] _str; //直接简单粗暴的把原来的空间给释放调，,我们不能把s给释放调，说不定以后还会用到s的数据，有可能new失败
+            //     //先把原来的空间给释放调，再重新开辟一块空间
+            //     _str = new char[strlen(s._str) + 1];//开一个和s一样大的空间，
+            //     strcpy(_str, s._str);
+            // }
+                 if (this!=&s)
             {
-                delete[] this->_str; //先把原来的空间给释放调，再重新开辟一块空间
-                this->_str = new char[strlen(s._str) + 1];
-
-                strcpy(this->_str, s._str);
+                char* tmp=new char[strlen(s._str)+1];
+                strcpy(tmp,s._str);//先拷贝再释放掉
+                delete [] _str;//
+                _str=tmp;
             }
-            return *this;
+            return *this;//出了作用于*this还在，所以传引用返回
         }
         ~string() //析构函数
         {
@@ -45,8 +55,10 @@ namespace xzw
         //string s2(s);//拷贝构造,对默认类型会完成数值拷贝，浅拷贝，指向同一块空间，出了作用域，调用释放函数，自定义类型，调用他的拷贝构造
         //我们不能在同一块空间
         string s2(s);
-        string s3("sortt");
+        string s3("hello ");
         s = s3; //如果我们不写就是浅拷贝，连着地址一起拷贝过去了，s内存还没有释放，内存泄漏
-        printf("hello\n");
+        //我们不能直接去拷贝，因为可能会出现空间不够，导致还要去进一步的扩容，小拷贝到大，会导致空间用不完，
+        s="alcd";
+        printf("sdahello,world a\n");
     }
 }
