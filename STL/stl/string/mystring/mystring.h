@@ -60,7 +60,7 @@ namespace xzw
             }
             return *this; //出了作用于*this还在，所以传引用返回
         }
-        ~string() //析构函数
+        ~string() //析构函数 
         {
             delete[] _str; //new完之后就要delete
             _str = nullptr;
@@ -105,6 +105,7 @@ namespace xzw
         cout<<s1.c_str()<<endl;//遇到\0就结束,\0是不可见的字符
         s[0]='d';
         //s[20]='a';
+        s[2]='g';
         for(size_t i=0;i<s.size();i++)
         {
             cout<<s[i]<<" ";
