@@ -52,35 +52,65 @@ namespace xzw
         {
             return _str;
         }
-        string(const string &s) //传引用拷贝
-            : _size(s._size), _capacity(s._capacity)
-        {
-            _str = new char[_capacity + 1];
-            strcpy(_str, s._str);
-        }
-        //assign，赋值运算符
-        string &operator=(const string &s) //我们也要自己写，不然就是浅拷贝，还要考虑自己给自己赋值
-        {
-            //如果自己给自己赋值，要拷贝的东西被我们毁掉，就没办法操作了
-            // if (this!=&s)
-            // {
-            //     delete[] _str; //直接简单粗暴的把原来的空间给释放调，,我们不能把s给释放调，说不定以后还会用到s的数据，有可能new失败
-            //     //先把原来的空间给释放调，再重新开辟一块空间
-            //     _str = new char[strlen(s._str) + 1];//开一个和s一样大的空间，
-            //     strcpy(_str, s._str);
-            // }
-            if (this != &s)
-            {
-                char *tmp = new char[s._capacity+1];
-                strcpy(tmp, s._str); //先拷贝再释放掉
-                delete[] _str;       //
+        //传统写法--本本分分的去开空间拷贝数据
+        // string(const string &s) //传引用拷贝
+        //     : _size(s._size), _capacity(s._capacity)
+        // {
+        //     _str = new char[_capacity + 1];
+        //     strcpy(_str, s._str);
+        // }
+        // //assign，赋值运算符
+        // string &operator=(const string &s) //我们也要自己写，不然就是浅拷贝，还要考虑自己给自己赋值
+        // {
+        //     //如果自己给自己赋值，要拷贝的东西被我们毁掉，就没办法操作了
+        //     // if (this!=&s)
+        //     // {
+        //     //     delete[] _str; //直接简单粗暴的把原来的空间给释放调，,我们不能把s给释放调，说不定以后还会用到s的数据，有可能new失败
+        //     //     //先把原来的空间给释放调，再重新开辟一块空间
+        //     //     _str = new char[strlen(s._str) + 1];//开一个和s一样大的空间，
+        //     //     strcpy(_str, s._str);
+        //     // }
+        //     if (this != &s)
+        //     {
+        //         char *tmp = new char[s._capacity+1];
+        //         strcpy(tmp, s._str); //先拷贝再释放掉
+        //         delete[] _str;       //
 
-                _str = tmp; 
-                _size = s._size;
-                _capacity = s._capacity;
-            }
-            return *this; //出了作用于*this还在，所以传引用返回
+        //         _str = tmp; 
+        //         _size = s._size;
+        //         _capacity = s._capacity;
+        //     }
+        //     return *this; //出了作用于*this还在，所以传引用返回
+        // }
+
+        //现代写法---投机取巧的方式去实现深拷贝
+        string (const string & s)
+        :_str(nullptr)//tmp交换后指向空，delete 空是不会报错的
+        {
+            string tmp(s._str);//是一种代码复用行为
+            swap(_str,tmp._str);
         }
+
+        // string operator=(const string& s)
+        // {
+        //     if(this!=&s)
+        //     {
+        //         string tmp(s);//调用一个拷贝构造
+        //         swap(_str,tmp._str);//出了作用域，tmp现在是s的地址，出了作用域还帮助s把空间给释放掉
+
+        //     }
+        //     return *this;
+        // }
+        
+
+        //提倡
+        string operator=(string s)//使用拷贝构造，没有用引用传参,s就是原来的拷贝
+        {
+            swap(_str,s._str);//所有类的赋值都可以这样做
+            return *this;
+        }
+
+
         ~string() //析构函数 
         {
             delete[] _str; //new完之后就要delete
@@ -122,10 +152,10 @@ namespace xzw
             }
 
         }
-        string operator+=(const char*str)
-        {
-            
-        }
+        // string operator+=(const char*str)
+        // {
+
+        // }
 
 
 
@@ -165,7 +195,7 @@ namespace xzw
         string::iterator it=s.begin();
         while(it!=s.end())
         {
-            *it+=1;
+            *it+=2;
             it++;
         }
         it=s.begin();
