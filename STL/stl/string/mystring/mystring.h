@@ -19,6 +19,27 @@ namespace xzw
         // {
         //     _str[0]='\0';
         // }
+        typedef char* iterator;//迭代器，指针类型，内嵌类型，就是在类里面定义的类型,普通迭代器
+        typedef const char* const_iterator;//只可以读，不可以写
+        const_iterator begin() const//解引用之后那个内容是不可以修改的，const对象
+        {
+            return _str;
+
+        }
+        const_iterator end()const
+        {
+            return _str+_size;
+        }
+        iterator begin()
+        {
+            return _str;//返回第一个位置的地址
+
+        }
+        iterator end()
+        {
+            return _str+_size;//最后一个地址的下一个位置
+        }
+
 
         string(const char *str= "" ) //构造函数，我们可以给一个全却缺省
             //: _str(str)//不能这样写，因为我们要能够动态的扩容
@@ -50,11 +71,11 @@ namespace xzw
             // }
             if (this != &s)
             {
-                char *tmp = new char[+1];
+                char *tmp = new char[s._capacity+1];
                 strcpy(tmp, s._str); //先拷贝再释放掉
                 delete[] _str;       //
 
-                _str = tmp;
+                _str = tmp; 
                 _size = s._size;
                 _capacity = s._capacity;
             }
@@ -83,6 +104,31 @@ namespace xzw
             return _str[pos];//const修饰都不能改变
         }
 
+        void push_back(char ch)//尾插
+        {   
+            if(_size==_capacity)//满了就要增容
+            {
+
+            }
+            _str[_size]=ch;
+            _size++;
+            _str[_size]='\0';//
+        }
+        void append(char *str)
+        {
+            if(_size==_capacity)
+            {
+
+            }
+
+        }
+        string operator+=(const char*str)
+        {
+            
+        }
+
+
+
     };
     void test_string1()
     {
@@ -104,7 +150,6 @@ namespace xzw
         cout<<s.c_str()<<endl;//c形式的输出，
         cout<<s1.c_str()<<endl;//遇到\0就结束,\0是不可见的字符
         s[0]='d';
-        //s[20]='a';
         s[2]='g';
         for(size_t i=0;i<s.size();i++)
         {
@@ -113,5 +158,26 @@ namespace xzw
 
         cout<<endl;
 
+    }
+    void test_string3()
+    {
+        string s("hello world");
+        string::iterator it=s.begin();
+        while(it!=s.end())
+        {
+            *it+=1;
+            it++;
+        }
+        it=s.begin();
+          while(it!=s.end())
+        {
+            cout<<*it<<" ";
+            it++;
+        }
+        cout<<endl;
+        for(auto e:s)//编译之后就被自动替换成迭代器
+        {
+            cout<<e<<" ";
+        }
     }
 }
