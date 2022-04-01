@@ -1,5 +1,5 @@
 string:main.cpp
-	g++ main.cpp -o string -g
+	g++ main.cpp -o string -std=c++11 -g
 
 .PHONY:clean
 clean:	
