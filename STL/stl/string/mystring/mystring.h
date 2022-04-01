@@ -16,7 +16,7 @@ namespace xzw
         {
             strcpy(_str, str);
         }
-        string(const string &s) //传引用拷贝
+        string(const string &s) //传引用拷贝,因为是开辟一个新变量，所以需要为他开辟一个空间
             : _str(new char[strlen(s._str) + 1])
         {
             strcpy(_str, s._str);
@@ -27,8 +27,8 @@ namespace xzw
             if (strcmp(this->_str,s._str)!=0)
             {
                 delete[] this->_str; //先把原来的空间给释放调，再重新开辟一块空间
+                *this=nullptr;
                 this->_str = new char[strlen(s._str) + 1];
-
                 strcpy(this->_str, s._str);
             }
             return *this;
