@@ -165,12 +165,18 @@ namespace xzw
             if (_size == _capacity) //满了就要增容
             {
                 //增容
-                reserve(_capacity*2);
+                reserve(_capacity==0?4:_capacity*2);
             }
             _str[_size] = ch;
             _size++;
             _str[_size] = '\0'; //
         }
+        void resize(size_t n,char ch='\0')//改变容量的同时对未有的东西进行初始化，已经有东西就不用初始化
+        {
+            reserve(n);
+            //dui 
+        }
+
         void append(const char *str)//不能直接常数个的去扩容，扩容可能还是不太够用
         {
             //计算实际的空间
