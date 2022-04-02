@@ -2,7 +2,7 @@
 #include <string.h>
 #include <iostream>
 #include <cassert>
-#include<cstdio>
+#include <cstdio>
 using namespace std;
 namespace xzw
 {
@@ -144,20 +144,18 @@ namespace xzw
             return _str[pos]; //const修饰都不能改变
         }
 
-        void reserve(size_t n)//对容量进行一个改变
+        void reserve(size_t n) //对容量进行一个改变,给一个小于capacity的数值，不会对容量有影响
         {
             //n代表实际的空间
-            if(n>_capacity)
+            if (n > _capacity)
             {
                 //空间不够
-                char* tmp=new char[n+1];//容量到n要对\0多开一个
-                strcpy(tmp,_str);
-                delete [] _str;//把原来的空间销毁掉
-                _str=tmp;
-                _capacity=n;
-
+                char *tmp = new char[n + 1]; //容量到n要对\0多开一个
+                strcpy(tmp, _str);
+                delete[] _str; //把原来的空间销毁掉
+                _str = tmp;
+                _capacity = n;
             }
-
         }
 
         void push_back(char ch) //尾插
@@ -165,38 +163,64 @@ namespace xzw
             if (_size == _capacity) //满了就要增容
             {
                 //增容
-                reserve(_capacity==0?4:_capacity*2);
+                reserve(_capacity == 0 ? 4 : _capacity * 2);
             }
             _str[_size] = ch;
             _size++;
             _str[_size] = '\0'; //
         }
-        void resize(size_t n,char ch='\0')//改变容量的同时对未有的东西进行初始化，已经有东西就不用初始化
+        void resize(size_t n, char ch = '\0') //改变容量的同时对未有的东西进行初始化，已经有东西就不用初始化
         {
-            reserve(n);
-            //dui 
+            //如果n小于size的话,容量不改变，,但是字符串也要减小
+            if (n < _size) //只保留前n个字符
+            {
+                _str[n] = '\0'; //在n的位置设置为\0
+                _size = n;      //同时将
+                //在
+            }
+            else if (_size < n && _capacity > n) //size小,容量大，就不用扩容
+            {
+                int rest = n - _capacity;
+
+                while (rest--)
+                {
+                    push_back(ch);
+                }
+                //memset(_str+_size,ch,n-_size);//这样也可以
+            }
+            else if (_size < n && _capacity < n) //size小，容量小，也需要扩容
+            {
+                int rest = n - _capacity;
+                reserve(n);
+                while (rest--)
+                {
+                    push_back(ch);
+                }
+            }
+            //reserve(n);
+            //dui
         }
 
-        void append(const char *str)//不能直接常数个的去扩容，扩容可能还是不太够用
+        void append(const char *str) //不能直接常数个的去扩容，扩容可能还是不太够用
         {
             //计算实际的空间
-            size_t len=strlen(str);
+            size_t len = strlen(str);
 
-            if (_size+len > _capacity)//天然考虑一个\0
+            if (_size + len > _capacity) //天然考虑一个\0
             {
                 //就要扩容
-                reserve(_size+len);
+                reserve(_size + len);
             }
-            strcpy(_str+_size,str);//从原来\0位置开始往后拷贝，\0也会自动拷贝进去
-            _size+=len;
+            strcpy(_str + _size, str); //从原来\0位置开始往后拷贝，\0也会自动拷贝进去
+            _size += len;
         }
-        string& operator+=(const char*str)
+        string &operator+=(const char *str)
         {
             //this->append(str);
             append(str);
             return *this;
         }
-        string & operator+=(const char ch)
+        string &operator+=(const char ch)
         {
             this->push_back(ch);
             return *this;
@@ -250,7 +274,7 @@ namespace xzw
         {
             cout << e << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
     void test_string4()
     {
@@ -260,9 +284,15 @@ namespace xzw
         s.push_back('j');
         s.append("hellllo worlldddd");
         string s1;
-        s1+='f';
-        s1+="hfih";
-        cout<<s1.c_str()<<endl;
-
+        s1 += 'f';
+        s1 += "hfih";
+        cout << s1.c_str() << endl;
+    }
+    void test_string5()
+    {
+        string s("abcdefg");
+        s.resize(20, 'b');
+        s.resize(2);
+        cout << s.c_str() << endl;
     }
 }
