@@ -337,7 +337,7 @@ namespace xzw
     void test_string5()
     {
         string s("abcdefg");
-        s.resize(20, 'b');
+        s.resize(10, 'b');
         size_t pos=s.find("cd");
         cout<<pos<<endl;
         s.insert(2,'l');
