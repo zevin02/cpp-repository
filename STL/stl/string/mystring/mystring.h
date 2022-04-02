@@ -12,16 +12,19 @@ namespace xzw
         char *_str;
         size_t _size;
         size_t _capacity; //能存有效字符的空间个数，不算上\0
+        static const size_t npos=-1;//静态成员变量属于整个类域
     public:
         // string()//构造一个空字符串
         //     :_str(new char[1])
-        //     ,_size(0)
+        //     ,_size(0)  
         //     ,_capacity(0)//存0个有效，
         // {
         //     _str[0]='\0';
         // }
+       //string::npos=-1;//整形的最大值
         typedef char *iterator;             //迭代器，指针类型，内嵌类型，就是在类里面定义的类型,普通迭代器
         typedef const char *const_iterator; //只可以读，不可以写
+     
         const_iterator begin() const        //解引用之后那个内容是不可以修改的，const对象
         {
             return _str;
@@ -225,6 +228,49 @@ namespace xzw
             this->push_back(ch);
             return *this;
         }
+        size_t find(char ch)//返回第一次出现时候的位置，不存在就返回一个npos，
+        {
+            for(size_t i=0;i<_size;i++)
+            {
+                if(_str[i]==ch)
+                {
+                    return i;
+                }
+            }
+            return npos;
+        }
+        size_t find(const char *s,size_t pos=0)//查找一个字符串,从pos位置开始找
+        {
+            char*ptr=strstr(_str+pos,s);//找不到就返回一个nillptr，找到了就返回第一次在s里面出现的位置的指针
+            if(ptr==nullptr)
+            {
+                return npos;
+            }
+            else
+            return ptr-_str;//和第一个位置相减就可以得到他的下标
+
+        }
+        string& insert(size_t pos,char ch)
+        {
+            assert(pos<=_size);//必须三小于size
+            if(_size==_capacity)
+            {
+                reserve(_capacity==0?4:_capacity*2);
+            }
+            //从后往前挪动
+            size_t end=_size;
+            while(end>=pos)
+            {
+                _str[end+1]=_str[end];
+                end--;
+            }
+            //插入
+            _str[pos]=ch;
+            _size++;
+            _str[_size]='\0';
+            return *this;
+        }
+
     };
     void test_string1()
     {
@@ -292,6 +338,10 @@ namespace xzw
     {
         string s("abcdefg");
         s.resize(20, 'b');
+        size_t pos=s.find("cd");
+        cout<<pos<<endl;
+        s.insert(2,'l');
+        cout<<s.c_str()<<endl;
         s.resize(2);
         cout << s.c_str() << endl;
     }
