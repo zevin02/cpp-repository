@@ -123,6 +123,16 @@ namespace xzw
             swap(_capacity, s._capacity);
             return *this;
         }
+        string operator=(const char*s)
+        
+        {
+            _str=nullptr;
+            string tmp(s);
+            swap(tmp._str,_str);
+            swap(_size,tmp._size);
+            swap(_capacity,tmp._capacity);
+            return *this;
+        }
 
         ~string() //析构函数
         {
@@ -257,23 +267,23 @@ namespace xzw
                 reserve(_capacity == 0 ? 4 : _capacity * 2);
             }
             //从后往前挪动
-            if (pos == 0)
+            if (pos == 0) //头插
             {
                 //用指针
-                
+
                 string s;
-                s+=ch;
+                s += ch;
                 s += _str;
-                swap(s._str,_str);//交换之后s直接去调用他的稀构函数，就会把s原来的空间给释放掉                
+                swap(s._str, _str); //交换之后s直接去调用他的稀构函数，就会把s原来的空间给释放掉
                 _size++;
                 return *this;
             }
             else
             {
-                size_t end = _size;
-                while (end >= pos) //end会越界，一个超大的数值，但是因为pos还是一个无符号数的比较，只要有一方是无符号数，就会按照无符号数进行比较,通常往范围大的提升
+                size_t end = _size + 1; //为了解决那个问题，我们可以让end=size+1
+                while (end > pos)       //end会越界，一个超大的数值，但是因为pos还是一个无符号数的比较，只要有一方是无符号数，就会按照无符号数进行比较,通常往范围大的提升
                 {
-                    _str[end + 1] = _str[end];
+                    _str[end] = _str[end - 1];
                     end--;
                 }
                 //插入
@@ -283,7 +293,53 @@ namespace xzw
                 return *this;
             }
         }
+
+        string &insert(size_t pos, const char *s)
+
+        {
+            size_t len = strlen(s);
+            if (len + _size > _capacity)
+            {
+                reserve(len + _capacity);
+            }
+            //数据全部都往后挪动
+            size_t end = _size + len; //为了解决那个问题，我们可以让end=size+1
+            while (end >= pos+len)         //end会越界，一个超大的数值，但是因为pos还是一个无符号数的比较，只要有一方是无符号数，就会按照无符号数进行比较,通常往范围大的提升
+            {
+                //>pos会出现越界的情况
+                _str[end] = _str[end - len];
+                end--;
+            }
+            //插入
+            strncpy(_str+pos,s,len);//拷贝len个字符过去,不能带\0,从_str+pos的位置从s里面拷贝len个字符
+            _size+=len;
+            return *this;
+        }
+
+        string& erase(size_t pos,size_t len=npos)
+        {
+            assert(pos<_size);
+            size_t rest=_size-pos;
+            if(len==npos||len>=rest)
+            {
+                //有多少删除多少
+                _str[pos]='\0';
+                _size=pos;
+            }
+            else
+            {
+                strncpy(_str+pos,_str+pos+len,_size-pos-len);
+                _str[pos+len]='\0';
+                _size=pos+len;
+            }
+            return *this;
+        }       
     };
+    ostream& operator<<(ostream&out,const string& s)//带返回值，为了连续的访问
+    {   
+        ostream//可以支持输出库的内置类型，可以也可以自动识别类型
+
+    }
     void test_string1()
     {
         string s("hello ");
@@ -353,8 +409,16 @@ namespace xzw
         size_t pos = s.find("cd");
         cout << pos << endl;
         s.insert(0, 'l');
+        s.insert(0,"abdh");//尽量少用insert，0（n）
         cout << s.c_str() << endl;
         s.resize(2);
         cout << s.c_str() << endl;
+    }
+    void test_string6()
+    {
+        string s="hello";
+        s.insert(0,"ab");
+        //s.erase(1,2);//把2位置后面的东西全部都删除掉
+        cout<<s.c_str();
     }
 }
