@@ -1,10 +1,10 @@
 #include<iostream>
 using namespace std;
 #include<cstdio>
-//string¾ÍÊÇ¹ÜÀí×Ö·û´®µÄÀà
+//stringï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #include<string>
 
-//¿âÀïÃæ¶¨Òå
+//ï¿½ï¿½ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½
 template<class T>
 class basic_string
 {
@@ -14,34 +14,34 @@ private:
 };
 
 
-//±àÂë --Öµ--·ûºÅ½¨Á¢Ó³Éä¹ØÏµ--±àÂë±í£¨ÓÃÖµºÍ·ûºÅ½¨Á¢¶ÔÓ¦¹ØÏµ£© 
-// ASCILL±àÂë±í---±íÊ¾Ó¢ÎÄ±àÂë
-// unicode ---£¨°üº¬ascill£©±íÊ¾È«ÊÀ½çÎÄ×Ö±àÂë
-//ÓÖ°üº¬utf -8£¬utf-16 
-//gbk        --     ÖÐ¹ú×Ô¼ºÁ¿Éí¶¨×öµÄ±àÂë±í
-// ºº×Ö¿ÉÒÔÓÃ2¸ö×Ö½Ú£¬
+//ï¿½ï¿½ï¿½ï¿½ --Öµ--ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½Ïµ--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Í·ï¿½ï¿½Å½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ïµï¿½ï¿½ 
+// ASCILLï¿½ï¿½ï¿½ï¿½ï¿½---ï¿½ï¿½Ê¾Ó¢ï¿½Ä±ï¿½ï¿½ï¿½
+// unicode ---ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ascillï¿½ï¿½ï¿½ï¿½Ê¾È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½
+//ï¿½Ö°ï¿½ï¿½ï¿½utf -8ï¿½ï¿½utf-16 
+//gbk        --     ï¿½Ð¹ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½Ö½Ú£ï¿½
 // 
-//typrdef basic_string<char> string,ÎÒÃÇÓÃµÄÊÇtypedefºó³öÀ´µÄ£¬Ä£°åµÄ
+//typrdef basic_string<char> string,ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½typedefï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½Ä£ï¿½ï¿½ï¿½
 
 //int main()
 //{
 //	string s1("hello");
-//	char str2[] = "³Ô·¹";
+//	char str2[] = "ï¿½Ô·ï¿½";
 //	cout << sizeof(char) << endl;
-//	cout << sizeof(wchar_t) << endl;//2¸ö×Ö½Ú£¬wstring
+//	cout << sizeof(wchar_t) << endl;//2ï¿½ï¿½ï¿½Ö½Ú£ï¿½wstring
 //
 //	return 0;
 //}
 
 
 
-//³õÊ¼»¯
+//ï¿½ï¿½Ê¼ï¿½ï¿½
 
 void init()
 {
-	string s1;//ÎÞµ÷ÓÃ¹¹Ôìº¯Êý
-	string s2("hello world");//¹¹Ôìº¯Êý
-	string s3(s2);//¿½±´¹¹Ôì
+	string s1;//ï¿½Þµï¿½ï¿½Ã¹ï¿½ï¿½ìº¯ï¿½ï¿½
+	string s2("hello world");//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
+	string s3(s2);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//cin >> s1;
 	cout << s1 << endl;
 	cout << s2 << endl;
@@ -49,36 +49,36 @@ void init()
 	//substring (3)	
 
 	//string(const string & str, size_t pos, size_t len = npos);
-	//ÀûÓÃ×Ö´®½øÐÐ³õÊ¼»¯£¬posÊÇ´Ó0¿ªÊ¼£¬´ÓstringÀïÃæÏÈºóÊýlen¸ö³¤¶È½øÐÐ¿½±´
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½Ð³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½posï¿½Ç´ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½stringï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½lenï¿½ï¿½ï¿½ï¿½ï¿½È½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½
 
 
 	string s4(s2, 2, 6);
 	cout << s4 << endl;//llo wo
-	string s5(s2, 2);//Ä¬ÈÏ´Ó×ø±êÎª2µÄµØ·½Íùºó½ØÈ¡ËùÓÐµÄs2
+	string s5(s2, 2);//Ä¬ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½Îª2ï¿½ÄµØ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ðµï¿½s2
 	cout << s5 << endl;//ello world
 
 	//string (const char* s, size_t n);
-	string s7("hello world", 3);//È¡Ç°3¸ö×Ö·û
+	string s7("hello world", 3);//È¡Ç°3ï¿½ï¿½ï¿½Ö·ï¿½
 	cout << s7 << endl;
-	//string(size_t n, char c);Á¬ÐøÅªn¸öc
-	string s8(3, '!');//£¡£¡£¡
+	//string(size_t n, char c);ï¿½ï¿½ï¿½ï¿½Åªnï¿½ï¿½c
+	string s8(3, '!');//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 
 void func()
 {
 	string s1("hello");
-	//²»¼ÆËã¡®\0¡¯£¬ÕâÁ½¸ö¶ÔÓÚstringÃ»Ê²Ã´Çø±ð£¬sizeÊÇºó³öÏÖÎªÁË±£Ö¤ÈÝÆ÷µÄÒ»ÖÂÐÔ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ã¡®\0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½stringÃ»Ê²Ã´ï¿½ï¿½ï¿½ï¿½sizeï¿½Çºï¿½ï¿½ï¿½ï¿½Îªï¿½Ë±ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 	cout << s1.size() << endl;//5
 	cout << s1.length() << endl;//5
-	cout << s1.max_size() << endl;//Ã»Ê²Ã´ÒâÒå
+	cout << s1.max_size() << endl;//Ã»Ê²Ã´ï¿½ï¿½ï¿½ï¿½
 	cout << s1 << endl;
-								  //¼ÆËãÈÝÁ¿
+								  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cout << s1.capacity() << endl;//15
-	s1.clear();//°ÑÓÐÐ§Êý¾Ý¶¼ÇåÀíµô,¿Õ¼ä±£Áô£¬±ä³É¿Õ×Ö·û´®£¬0¸ö×Ö·û
+	s1.clear();//ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Õ¼ä±£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¿ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½Ö·ï¿½
 	cout << s1 << endl;
 	cout << s1.capacity() << endl;
-	if (s1.empty())//ÅÐ¶Ï´Ë×Ö·û´®ÊÇ·ñÎª¿Õ£¬¼´ÊÇ·ñ³¤¶ÈÎª0
+	if (s1.empty())//ï¿½Ð¶Ï´ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Ç·ñ³¤¶ï¿½Îª0
 	{
 		cout << "not" << endl;
 	}
@@ -87,7 +87,7 @@ void func()
 }
 
 
-//char& operator[] (size_t pos);ÕâÀïµÄÒýÓÃ·µ»ØÊÇÒòÎªÕâ¸öÊý×éÊÇÔÚ¶ÑÉÏ¿ª±ÙµÄ£¬³öÁË×÷ÓÃÓò»¹ÔÚ£¬²¢ÇÒ¿ÉÒÔ¶ÔÆäÖÐµÄ×Ö·û½øÐÐÐÞ¸Ä£¬»òÕßµ÷ÓÃ£¬»¹¿ÉÒÔ¼õÉÙ¿½±´£¨²»ÊÇÖ÷ÒªÄ¿µÄ£©
+//char& operator[] (size_t pos);ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½Ï¿ï¿½ï¿½ÙµÄ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä£ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÄ¿ï¿½Ä£ï¿½
 
 
 void operatoracess()
@@ -95,42 +95,42 @@ void operatoracess()
 	string s1("hello world");
 	for (size_t i = 0; i < s1.length(); i++)
 	{
-		cout << s1[i];//[]ÊÇ¶ÏÑÔÖÕÖ¹³ÌÐò£¬¼ì²é´íÎó
+		cout << s1[i];//[]ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ò£¬¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		s1[i] += 1;
 	}
 	cout << endl;
 	for (size_t i = 0; i < s1.length(); i++)
 	{
-		s1.at(i) -= 1;//ºÍÉÏÃæÊÇÒ»ÑùµÄ
-		cout << s1.at(i) << endl;//atÊÇÅ×Òì³£¼ì²é´íÎó,½¨Òé»¹ÊÇÊ¹ÓÃ[ ]
+		s1.at(i) -= 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
+		cout << s1.at(i) << endl;//atï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½é»¹ï¿½ï¿½Ê¹ï¿½ï¿½[ ]
 	}
 	cout << endl;
 
 }
 
-//¶Ô×Ö·û´®½øÐÐÎ²²¿Ìí¼Ó×Ö·û»ò×Ö·û´®
+//ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 void add()
 {
 	string s;
 	s.push_back('a');
-	s.append("bcde");//Î²²åbcd
+	s.append("bcde");//Î²ï¿½ï¿½bcd
 	cout << s << endl;//abcd
-	s += '!';//Ò²¿ÉÒÔÀûÓÃÔËËã·ûÖØÔØ½øÐÐÊµÏÖÎ²²å£¬ÍÆ¼ö,abcd!
+	s += '!';//Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½Êµï¿½ï¿½Î²ï¿½å£¬ï¿½Æ¼ï¿½,abcd!
 }
 
 
-//Ö»½»»»×Ö·û
-//abc-bcd-qwlkj±ä³É jkl-wqd-cbcba  
+//Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
+//abc-bcd-qwlkjï¿½ï¿½ï¿½ jkl-wqd-cbcba  
 //
 class Solution {
 public:
-  //¼ÆËã×îºóÒ»¸öµ¥´ÊµÄ³¤¶ÈÈç¡°hello world  ¡±g
+  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÊµÄ³ï¿½ï¿½ï¿½ï¿½ç¡°hello world  ï¿½ï¿½g
 
   int lengthOfLastWord(string s) {
             int end=s.size()-1;
                     while(s[end]==' ')
                     {
-                                  s.erase(end,1);//ÎÞ·¨Ê¹ÓÃ
+                                  s.erase(end,1);//ï¿½Þ·ï¿½Ê¹ï¿½ï¿½
                                               end--;
                                                       
                                                       
@@ -151,103 +151,103 @@ public:
 
 };
 
-//±éÀú£¬1.µü´úÆ÷2.·¶Î§for
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2.ï¿½ï¿½Î§for
 void test_string1()
 {
   
 string s1("hello");
-string::iterator it=s1.begin();//s1.begin(),ÊÇµÚÒ»¸öÊý¾ÝµÄµØÖ·£¬s1.end£¨£©ÊÇ×îºóÒ»¸öÊý¾ÝµÄºóÒ»¸öµÄµØÖ·
-//Õâ¸öiteratorÊÇ¶¨ÒåÔÚstringÀïÃæ£¬itÏÖÔÚÖ¸ÏòÁËµÚÒ»¸öÊý¾ÝµÄµØÖ·
-//ÏÖÔÚ¿ÉÒÔÏÈÏëÏó³ÉÒ»¸öÏñÖ¸ÕëÒ»ÑùµÄÀàÐÍ
+string::iterator it=s1.begin();//s1.begin(),ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄµï¿½Ö·ï¿½ï¿½s1.endï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄºï¿½Ò»ï¿½ï¿½ï¿½Äµï¿½Ö·
+//ï¿½ï¿½ï¿½iteratorï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½stringï¿½ï¿½ï¿½æ£¬itï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ëµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄµï¿½Ö·
+//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
-while(it!=s1.end())//Ö±µ½½áÎ²¾Í½áÊøÁË£¬µ«ÊÇ²»½¨ÒéÓÃ<
+while(it!=s1.end())//Ö±ï¿½ï¿½ï¿½ï¿½Î²ï¿½Í½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<
 {
-  cout<<*it<<" ";//*¾ÍÊÇÈ¡ËûµÄÊý¾Ý
-  ++it;//µ½ÏÂÒ»¸öµØÖ·
+  cout<<*it<<" ";//*ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  ++it;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö·
 }
 cout<<endl;
-//³ýÁË¿ÉÒÔ¶Á»¹¿ÉÒÔÐ´
- it=s1.begin();//s1.begin(),ÊÇµÚÒ»¸öÊý¾ÝµÄµØÖ·£¬s1.end£¨£©ÊÇ×îºóÒ»¸öÊý¾ÝµÄºóÒ»¸öµÄµØÖ·
-//Õâ¸öiteratorÊÇ¶¨ÒåÔÚstringÀïÃæ£¬itÏÖÔÚÖ¸ÏòÁËµÚÒ»¸öÊý¾ÝµÄµØÖ·
-//ÏÖÔÚ¿ÉÒÔÏÈÏëÏó³ÉÒ»¸öÏñÖ¸ÕëÒ»ÑùµÄÀàÐÍ
+//ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´
+ it=s1.begin();//s1.begin(),ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄµï¿½Ö·ï¿½ï¿½s1.endï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄºï¿½Ò»ï¿½ï¿½ï¿½Äµï¿½Ö·
+//ï¿½ï¿½ï¿½iteratorï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½stringï¿½ï¿½ï¿½æ£¬itï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ëµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄµï¿½Ö·
+//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
-while(it!=s1.end())//Ö±µ½½áÎ²¾Í½áÊøÁË
+while(it!=s1.end())//Ö±ï¿½ï¿½ï¿½ï¿½Î²ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
-  *it-=1;//*¾ÍÊÇÈ¡ËûµÄÊý¾Ý
-  ++it;//µ½ÏÂÒ»¸öµØÖ·
+  *it-=1;//*ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  ++it;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö·
 }
 cout<<endl;
 
 
-//·¶Î§for,auto¿ÉÒÔ×Ô¶¯Ê¶±ð
-//for(auto e:s1)//°Ñs1ÀïÃæÃ¿¸ö×Ö·ûÈ¡³öÀ´¸³Öµ¸øe£¬²»ÐèÒª×Ô¼º++£¬×Ô¶¯ÅÐ¶Ï½áÊø
+//ï¿½ï¿½Î§for,autoï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ê¶ï¿½ï¿½
+//for(auto e:s1)//ï¿½ï¿½s1ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ö·ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ô¼ï¿½++ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ð¶Ï½ï¿½ï¿½ï¿½
 //{
 //  cout<<e<<" ";
 //}
 cout<<endl;
 
-//ÒªÐÞ¸Ä¾ÍÒªÓÃÒýÓÃ
+//Òªï¿½Þ¸Ä¾ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //for(auto& e:s1)
 //{
 //  e-=1;
 //}
 cout<<endl;
 
-//·´Ïòµü´úÆ÷
-//µ¹×Å±éÀú
-string::reverse_iterator rit=s1.rbegin();//rbegin£¨£©£¬ÊÇ×îºóÒ»¸öÊý¾ÝµÄµØÖ·
-//ÎªÁË¼ò»¯´úÂëÒ²¿ÉÒÔÖ±½ÓautoÍÆµ½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½
+string::reverse_iterator rit=s1.rbegin();//rbeginï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄµï¿½Ö·
+//Îªï¿½Ë¼ò»¯´ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½autoï¿½Æµï¿½
 //
 //auto  rit=s1.rbegin()
 //
-while(rit!=s1.rend())//rend£¨£©ÊÇµÚÒ»¸öÊý¾ÝµÄÇ°Ò»¸öµØÖ·
+while(rit!=s1.rend())//rendï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Ç°Ò»ï¿½ï¿½ï¿½ï¿½Ö·
 {
-  cout<<*rit<<" ";//olleh£¬·´¹ýÀ´±éÀú
-  ++rit;//·´Ïòµü´úÆ÷µÄ++£¬ÊÇÍù×ó×ßµÄ
+  cout<<*rit<<" ";//ollehï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  ++rit;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½++ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½
 }
 cout<<endl;
 
-//µü´úÆ÷±éÀúµÄÒâÒåÊÇÊ²Ã´ÄØ£ºËùÓÐµÄÈÝÆ÷¶¼¿ÉÒÔÓÃµü´úÆ÷ÕâÖÖ·ÃÎÊÐÞ¸Ä
-//1.¶ÔÓÚstringÀàÀ´Ëµ£¬ÀûÓÃ[]¶¼×ã¹»ºÃÓÃ,È·Êµ¿ÉÒÔ²»ÓÃµü´úÆ÷
-//2¡£¶ÔÓÚÆäËûÈÝÆ÷£¨Êý¾Ý½á¹¹£©Ò²¿ÉÒÔÊ¹ÓÃ£¬Èçlist£¬map£¬set£¬ÕâÐ©ÊÇ²»Ö§³Ö[]£¬ÒòÎªÖ»ÓÐÏñÊý×éÒ»ÑùµÄ¶«Î÷²ÅÖ§³Ö[]±éÀúºÍÏÂ±ê£¬
-//½áÂÛ£º£º¶ÔÓÚstringµÃ»áÓÃµü´úÆ÷£¬µ«ÊÇÎÒÃÇ»¹ÊÇÏ²»¶ÏÂ±ê¼Ó[],
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½Ø£ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
+//1.ï¿½ï¿½ï¿½ï¿½stringï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[]ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½ï¿½ï¿½,È·Êµï¿½ï¿½ï¿½Ô²ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
+//2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½listï¿½ï¿½mapï¿½ï¿½setï¿½ï¿½ï¿½ï¿½Ð©ï¿½Ç²ï¿½Ö§ï¿½ï¿½[]ï¿½ï¿½ï¿½ï¿½ÎªÖ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½[]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ê£¬
+//ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½stringï¿½Ã»ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½Â±ï¿½ï¿½[],
 
-//»¹ÓÐconstµü´úÆ÷£¬ÆÕÍ¨µü´úÆ÷ÊÇ¿É¶Á¿ÉÐ´µÄ
+//ï¿½ï¿½ï¿½ï¿½constï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿É¶ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
 string cstr("hello world");
 //funcion(cstr);
-string::const_iterator re=s1.begin();//Ö»¶Á²»Ð´£¬Í¬Àí»¹ÓÐ·´Ïòµü´úÆ÷
-//cbegin£¨£©¾ÍÊÇconstµü´úÆ÷£¬µ«ÊÇÎÒÃÇÆ½Ê±¶¼²»Ì«ÓÃ£¬
+string::const_iterator re=s1.begin();//Ö»ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//cbeginï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½constï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½Ê±ï¿½ï¿½ï¿½ï¿½Ì«ï¿½Ã£ï¿½
 
 }
 
 
 
-//¶ÔÓÚÈÝÁ¿µÄº¯Êý
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½
 void test_string3()
 {
 string s1;
-s1.reserve(100);//¿ÉÒÔÉèÖÃÈÝÁ¿µÄ´óÐ¡£¬ÈÝÁ¿¾ÍÊÇ100£¬¼ÓÉÏÔ­À´µÄÈÝÁ¿
+s1.reserve(100);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½100ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 string s2;
-s2.resize(100,'x');//Ò²ÊÇ¿ÉÒÔÉèÖÃÈÝÁ¿µÄ´óÐ¡£¬Í¬Ê±»¹¿ÉÒÔ¶ÔÆä½øÐÐ³õÊ¼»¯£¬Èç½«s1ÓÐÐ§Êý¾ÝµÄºóÃæÈ«²¿ÉèÖÃ³Éx£¬Èç¹ûÃ»ÓÐµÚ¶þ¸ö²ÎÊý£¬ÔòÄ¬ÈÏÊÇ¡®\0¡¯
+s2.resize(100,'x');//Ò²ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ð¡ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ç½«s1ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ÝµÄºï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ÐµÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½Ç¡ï¿½\0ï¿½ï¿½
 }
 
 
 
 
 
-//¶ÔÓÚfind£¬c_str ,rfindµÄÈÏÊ¶ÓëÀí½â
+//ï¿½ï¿½ï¿½ï¿½findï¿½ï¿½c_str ,rfindï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 void test_string2()
 {
 
 string s2="hello world";
-cout<<s2.c_str()<<endl;//½«string×ª±ä³ÉcÓïÑÔµÄÐÎÊ½×Ö·û´®£¬char*£¬ÒÔ\0½ØÖÁ
+cout<<s2.c_str()<<endl;//ï¿½ï¿½string×ªï¿½ï¿½ï¿½cï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½Ê½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½char*ï¿½ï¿½ï¿½ï¿½\0ï¿½ï¿½ï¿½ï¿½
 string file("test.txt");
-//ÎÒÃÇÒªÒÔcÓïÑÔµÄÐÎÊ½´ò¿ªÒ»¸öÎÄ¼þ
-//FILE* fout=fopen(s2.c_str(),"w"); //fopenµÚÒ»¸ö²ÎÊýÊÇchar*£¬ËùÒÔÓÃÕâº¯Êý
+//ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½cï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½
+//FILE* fout=fopen(s2.c_str(),"w"); //fopenï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½char*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½âº¯ï¿½ï¿½
 
-//ÒªÇóÈ¡³öÎÄ¼þµÄºó×º
+//Òªï¿½ï¿½È¡ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Äºï¿½×º
 
-  size_t pos=file.find('.');//ÔÚfileÀïÃæ²éÕÒ¡®x¡¯µÄÎ»ÖÃ£¬findµÄ·µ»ØÖµÊÇsize_t,ÏÂ±ê´Ó0¿ªÊ¼£¬²éÕÒµÚÒ»¸ö·ûºÏµÄ×ø±ê£¬·ñÔò¾Í·µ»Ø-1
+  size_t pos=file.find('.');//ï¿½ï¿½fileï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡ï¿½xï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½findï¿½Ä·ï¿½ï¿½ï¿½Öµï¿½ï¿½size_t,ï¿½Â±ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½-1
   
 string s1(file,pos);
 cout<<s1<<endl;
@@ -257,22 +257,22 @@ if(pos!=string::npos)
 cout<<suffix<<endl;
 }
 
-//rfind()//¿ÉÒÔ´ÓºóÃæÍêÇ°ÕÒ£¬ÕÒµ½µÚÒ»¸ö.£¬·½±ãÕÒºó×ºÃû
+//rfind()//ï¿½ï¿½ï¿½Ô´Óºï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ò£ï¿½ï¿½Òµï¿½ï¿½ï¿½Ò»ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½×ºï¿½ï¿½
 //https://blog.csdn.net/m0_61567378?spm=1000.2115.3001.5343
 string url("http://blog.csdn.net/m0_61567378?spm=1000.2115.3001.5343");
-//ÕÒÐ­ÒéÍ·
-size_t pos1=url.find(':');//£ºÇ°ÃæµÄ¾ÍÊÇÐ­ÒéÍ·
+//ï¿½ï¿½Ð­ï¿½ï¿½Í·
+size_t pos1=url.find(':');//ï¿½ï¿½Ç°ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Í·
 
-string protocol=url.substr(0,pos1-0);//È¡µÃ×Ö´®¾ÍÊÇ´Ó0¿ªÊ¼£¬µ½pos1Î»ÖÃ£¬³¤¶ÈÎªpos1µÄ×Ö´®£¬Ò²¾ÍÊÇhttp
+string protocol=url.substr(0,pos1-0);//È¡ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½Ç´ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½pos1Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Îªpos1ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½http
 cout<<protocol<<endl;
 
-//ÕÒÓòÃû£¬
-size_t pos2=url.find('/',pos1+3);//findÄ¬ÈÏ´Ó0¿ªÊ¼ÕÒ£¬ÏÖÔÚÎÒÃÇ¸ø¶¨Ëû´Ópos1+3Î»ÖÃ´¦¿ªÊ¼ÕÒ£¬Ò²¾ÍÊÇb¿ªÊ¼£¬ÍùºóÕÒ£¬ÕÒµ½/µÄÎ»ÖÃ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+size_t pos2=url.find('/',pos1+3);//findÄ¬ï¿½Ï´ï¿½0ï¿½ï¿½Ê¼ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pos1+3Î»ï¿½Ã´ï¿½ï¿½ï¿½Ê¼ï¿½Ò£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½bï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½Òµï¿½/ï¿½ï¿½Î»ï¿½ï¿½
 
 string domain=url.substr(pos1+3,pos2-pos1-3);
 cout<<domain<<endl;
 
-//Í³Ò»×ÊÔ´¶¨Î»
+//Í³Ò»ï¿½ï¿½Ô´ï¿½ï¿½Î»
 string uri=url.substr(pos2+1);
 cout<<uri<<endl;
 
@@ -285,25 +285,25 @@ cout<<uri<<endl;
 void test_string4()
 {
 
-//insert²»Ì«ÍÆ¼öÓÃ,O(n),Ð§ÂÊµÍ
+//insertï¿½ï¿½Ì«ï¿½Æ¼ï¿½ï¿½ï¿½,O(n),Ð§ï¿½Êµï¿½
 
   string s="hell";
-  s.insert(0,"owlod");//ÔÚÍ·ÉÏ²åÈëÒ»¸öowlod£¬ÊÇ´ÓµÚ0¸öÎ»ÖÃÍùºó²åÈë
-  s.insert(0,1,'x');//ÔÚÍ·ÉÏ²åÈëÒ»¸öx,ÊÇ
-  s.insert(4,"xx");//´ÓµÚ4¸öÎ»ÖÃÍùºó²åÈëxx
+  s.insert(0,"owlod");//ï¿½ï¿½Í·ï¿½Ï²ï¿½ï¿½ï¿½Ò»ï¿½ï¿½owlodï¿½ï¿½ï¿½Ç´Óµï¿½0ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  s.insert(0,1,'x');//ï¿½ï¿½Í·ï¿½Ï²ï¿½ï¿½ï¿½Ò»ï¿½ï¿½x,ï¿½ï¿½
+  s.insert(4,"xx");//ï¿½Óµï¿½4ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xx
   cout<<s<<endl;
 
-  //ÒªÅ²¶¯Êý¾ÝÐ§ÂÊºÜµÍ£¬
-  s.erase(4,2);//´Ó4Î»ÖÃ£¬É¾³ýÁ½¸ö³¤¶ÈµÄ×Ö·û
+  //ÒªÅ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ÊºÜµÍ£ï¿½
+  s.erase(4,2);//ï¿½ï¿½4Î»ï¿½Ã£ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½Ö·ï¿½
   cout<<s<<endl;
   s.erase(s.size()-1,1);//Î²É¾
-  s.erase(3);//µÚ¶þ¸ö²ÎÊý²»¸øÖµ¾ÍºóÃæÈ«²¿¶¼É¾³ýÁË
+  s.erase(3);//ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Íºï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½
 
-  //Î²É¾Ò²¿ÉÒÔ
+  //Î²É¾Ò²ï¿½ï¿½ï¿½ï¿½
 //s.pop_back();
 
-//ÊäÈëÒ»ÕûÐÐµÄÊý¾Ý£¬°üÀ¨¡® ¡¯
-getline(cin,s);//µÚÒ»¸ö²ÎÊýÊÇÁ÷ 
+//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+getline(cin,s);//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 
 
 }
@@ -315,24 +315,24 @@ void test_string5()
 
   string s1="hello";
   string s2="string";
-  cout<<(s1<s2)<<endl;//h<sËùÒÔ¾ÍÊÇÐ¡ÓÚ
+  cout<<(s1<s2)<<endl;//h<sï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 
-  cout<<("hello"<s2)<<endl;//char*µÄÒ²¿ÉÒÔ±È½Ï
-  cout<<(string("hello")<s2)<<endl;//ÕâÑùÒ²ÊÇ¿ÉÒÔµÄ
+  cout<<("hello"<s2)<<endl;//char*ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Ô±È½ï¿½
+  cout<<(string("hello")<s2)<<endl;//ï¿½ï¿½ï¿½ï¿½Ò²ï¿½Ç¿ï¿½ï¿½Ôµï¿½
 }
 
 
 
-//×Ö·û´®ÓëÕûÐÎµÄ×ª»¯
+//ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½×ªï¿½ï¿½
 
 
 void test_string6()
 {
 
-  int val=stoi("1234");//×ª±ä³Éint
+  int val=stoi("1234");//×ªï¿½ï¿½ï¿½int
   cout<<val<<endl;//1234
   double val1=stod("123");
-  //×ª±ä³É×Ö·û´®
+  //×ªï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
   string str=to_string(12.345);
 string s=to_string(123456);
 
@@ -342,25 +342,25 @@ string s=to_string(123456);
 }
 
 
-//Ç³¿½±´£¬Íê³ÉÖµ¿½±´£¬½«Ã¿¸ö×Ö½ÚÒ»Æð¿½±´
-//¶ÔÓÚÖ¸ÕëÀàÐÍµÄ¾Í²»¿ÉÒÔ¿¿Ç³¿½±´
-//Ç³¿½±´³­×÷ÒµÁ¬Ãû×Ö¶¼Ã»¸Ä£¬ÍêÍêÈ«È«µÄ³­
-//Éî¿½±´¾ÍÊÇ³­×÷Òµ¸ÄÁËÃû×Ö£¬²»ÍêÈ«µÄ³­
+//Ç³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ö½ï¿½Ò»ï¿½ð¿½±ï¿½
+//ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ÍµÄ¾Í²ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½Ç³ï¿½ï¿½ï¿½ï¿½
+//Ç³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½Ã»ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½È«È«ï¿½Ä³ï¿½
+//ï¿½î¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½Ä³ï¿½
 //
 
-classm  my_string 
+class  my_string 
 {
   private:
     char* _str;
   public:
-    //¹¹Ôìº¯Êý
+    //ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
     my_string(const char* str)
     :_str(new char[strlen(str)+1])
     {
 strcpy(_str,str);
     }
 
-    //¿½±´¹¹ÔìÒªÓÃÉî¿½±´
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½î¿½ï¿½ï¿½
     my_string(const my_string& s)
       :_str(new char[strlen(str)+1])
     {
@@ -375,7 +375,12 @@ void test_string7()
 
 }
 
+void test()
+{
+  string s("aaaaaa");
+  s.resize();
 
+}
 
 
 int main()
@@ -398,8 +403,8 @@ string s="hello world  ";
 //test_string6();
 
 string s1 = "A man, a plan, a canal: Panama";
-
-isPalindrome(s1);
+test();
+//isPalindrome(s1);
 
 return 0;
 
