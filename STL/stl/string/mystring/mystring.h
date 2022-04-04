@@ -337,8 +337,26 @@ namespace xzw
     };
     ostream& operator<<(ostream&out,const string& s)//带返回值，为了连续的访问
     {   
-        ostream//可以支持输出库的内置类型，可以也可以自动识别类型
+        //ostream//可以支持输出库的内置类型，可以也可以自动识别类型
+        for(auto ch:s)//没有\0
+        {
+            out<<ch;//把每个字符输出出来，
+        }
+        return out;
+        //out<<s.c_str();不能这样输出，这个是有\0
+        
 
+    }
+    istream& operator>>(istream&in,string &s)
+    {
+        //获取每个字符
+        char ch=in.get();
+        while(ch !=' '||ch!='\n')
+        {
+            s+=ch;
+            ch=in.get();
+        }
+        return in;
     }
     void test_string1()
     {
@@ -419,6 +437,23 @@ namespace xzw
         string s="hello";
         s.insert(0,"ab");
         //s.erase(1,2);//把2位置后面的东西全部都删除掉
-        cout<<s.c_str();
+        cout<<s.c_str()<<endl;
+        string s2;
+        cin>>s2;
+        cout<<s2<<endl;
     }
 }
+
+//浅拷贝的问题：
+//1.会稀构两次
+//2.其中一个对象进行修改会影响另一个，
+//3.
+
+//引用计数的写时拷贝
+//当有两个对象指向同一块空间的时候，计数为2,如果有一个对象要西沟，发现不是1,就减引用计数，为1的时候，再去西沟
+//不写的时候，就都不去改变，如果写的话才要去做深拷贝，延迟拷贝
+
+//inser erase 的先查看引用计数，不是1,才要去做生拷贝，再去修改
+//如果不写就只是增加引用计数，不进行深拷贝，提高效率
+
+//缺陷：引用计数存在线程安全问题，在多线程环境下要付出代价，在动态库，静态库中有些场景会存在问题
