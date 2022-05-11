@@ -48,13 +48,13 @@ int main()
 
 */
 
-//c++11 的方式
+// c++11 的方式
 //让A 这个类不能被继承，只要加一个final就可以了，加了final的话这个类就没有办法被继承
 
-class A final//不希望A 被继承
+class A final //不希望A 被继承
 
 {
-    protected:
+protected:
     int _a;
 };
 
@@ -63,12 +63,12 @@ class A final//不希望A 被继承
 
 // };
 
-class C 
+class C
 {
-    public:
-    virtual void f() final// 我不想他被重写
+public:
+    virtual void f() final // 我不想他被重写
     {
-        cout<<"hello "<<endl;
+        cout << "hello " << endl;
     }
 };
 // class D :public C
@@ -80,8 +80,11 @@ class C
 //     }
 // };
 
+/*
 
-class car 
+
+override
+class car
 {
     public:
     virtual void drive()
@@ -102,5 +105,47 @@ class benz: public car
 
 int main()
 {
+    return 0;
+}
+
+*/
+
+// 抽象类，无法实例化出对象
+
+//抽象---在现实世界中没有对应的实物
+//一个类型，如果一般在现实世界中，没有具体的对应事物，就定义成抽象类比较好，人，人都有职能是学习（学生，老师），老师的职能是传道授业
+//动物也是抽象类，熊猫什么都要去继承他
+//抽象类强制了子类去完成重写、某一个虚函数
+//override完成检查的工作，
+//纯虚函数更体现了接口继承（实现继承），继承下来是为了重新实现
+
+
+
+//抽象类里面多了一个虚函数表指针（表就是数组，里面存的虚函数的地址，函数指针数组），会有多4个字节
+
+
+class car
+{
+public:
+    virtual void drive() = 0; //纯虚函数，是只声明，不实现的,因为实现没有价值,因为包含纯虚函数的类不能实例化出对象
+
+    // virtual void fly()=0
+};
+
+class benz : public car
+{
+public:
+    virtual void drive()//重写虚函数，
+    {
+        cout << "hello " << endl;
+    }
+};
+
+int main()
+{
+
+    //可以用指针和引用
+    car *p=new benz;//用父类的对象来管理子类
+    p->drive(); //可以调到
     return 0;
 }
