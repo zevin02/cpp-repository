@@ -226,7 +226,7 @@ namespace bit
             ::swap(_capacity, s._capacity);
         }
         // 拷贝构造
-        string(const string &s)//编译器会判定，如果是左值就会到这里来
+        string(const string &s) //编译器会判定，如果是左值就会到这里来
             : _str(nullptr)
         {
             cout << "string(const string& s) -- 深拷贝" << endl;
@@ -242,21 +242,20 @@ namespace bit
             return *this;
         }
         // 移动构造
-         // 移动构造，如果是右值就会到这里来
+        // 移动构造，如果是右值就会到这里来
         //这种将亡值资源析构了很可惜，直接给我把
         string(string &&s) //要开始移动资源,c++11中，将右值分为1.纯右值（10，x+t，min（x，y）），2.将亡值(自定义对象)
             : _str(nullptr), _size(0), _capacity(0)
         {
-            cout << "string(string&& s) -- 移动语义" << endl;
+            cout << "string(string&& s) -- 移动构造" << endl;
             swap(s);
-            
         }
         // 移动赋值
         string &operator=(string &&s)
         {
-            cout << "string& operator=(string&& s) -- 移动语义" << endl;
-            swap(s);//
-            return *this;
+            cout << "string& operator=(string&& s) -- 移动赋值" << endl;
+            swap(s); //把里面的东西全都交换了
+            return *this;//这里返回交换之后的东西就可以了，
         }
         ~string()
         {
@@ -323,7 +322,31 @@ namespace bit
         size_t _size;
         size_t _capacity; // 不包含最后做标识的\0
     };
+    string to_string(int value)
+    {
+        string ret;
+        while (value)
+        {
+            int val = value % 10;
+            ret += ('0' + val);
+            value /= 10;
+        }
+
+        return ret; //这里返回的时候会调用一次拷贝构造，因为这里的ret是左值
+        //这里会先拷贝再析构是一种资源浪费，移动构造将x识别为右值，直接调用移动构造转移资源，提高效率
+        //在栈帧结束之前，就拷贝构造一个临时对象，没有任何价值
+        //现在编译器优化了
+        //函数快结束是，返回前，直接用str去构造ret，
+
+        //如果不用一个变量来接收的时候，就不会进行优化了，只能有一个临时对象了，没有优化的空间
+
+        //现在直接识别为右值，移动构造到下面的ret上面去
+        //把资源直接转移够要弄的临时对象，代价就很小，并没有
+        //这里也就不需要调用析构函数了
+    }
 }
+
+//引用是为了减少拷贝，提高效率
 
 // 1。左值引用左参数，可以完美的解决所有的问题
 // 2.左值引用做返回值，只能解决部分问题(出了作用域还在，没有进行拷贝)
@@ -347,8 +370,11 @@ void test8()
 bit::string func()
 {
     bit::string x("dasd");
-    return x;//这里会先拷贝再析构是一种资源浪费，移动构造将x识别为右值，直接调用移动构造转移资源，提高效率
+    return x;
 }
+
+
+#include<list>
 int main()
 {
     test1();
@@ -357,5 +383,34 @@ int main()
     test4();
     test8();
     func();
+    bit::string s("dasd");
+    bit::string s1 = s;       // s是一个左值，这个就是调用左值引用,调用左值引用
+    bit::string s2 = move(s); // move以后的左值就是右值了,之后得到的对象在进行移动构造，后的值赋给s2，move之后把s里面的值都清理出去了，转移走
+    //把move后的值，给别人就会有问题
+    bit::string ss = bit::to_string(1234); //返回之后会发生一次移动构造，接收这个函数的返回值也会发生一次移动构造,会发生两次拷贝构造
+    //接收函数就是右值，调用移动构造，如果编译器只拷贝构造一次，那么就直接把ret认为右值
+    //ss接收了转移到资源，地址什么的也都转移给了ss
+
+
+
+    //除了有移动构造，还有移动赋值
+    // bit::string s1("sdafll");
+    // bit::string s2("dsa");
+    // s1=s2;
+
+
+    bit::string ret;
+    ret=bit::to_string(1234);//先移动构造给临时对象，临时对象再移动赋值给ret，
+    //容器的插入版本都会提供一个右值引用的版本，
+
+
+    list<bit::string> lt;
+    bit::string aaa("dasdasd");//这里的s就是一个标准的左值
+    lt.push_back(aaa);//这里的aaa没有被转移 
+    cout<<endl;
+    lt.push_back("2222");//这里面的这个就是一个右值、
+    cout<<endl;
+    lt.push_back(bit::to_string(1234));//这里就是一个移动构造，效率就提高了，所有的插入接口都涉及移动构造
+
     return 0;
 }
