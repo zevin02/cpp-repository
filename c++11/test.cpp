@@ -244,13 +244,14 @@ namespace bit
         // 移动构造
         // 移动构造，如果是右值就会到这里来
         //这种将亡值资源析构了很可惜，直接给我把
+        //将资源移动了，移动到新对象上面，并且将原来对象的资源置空，解决拷贝构造代价的问题
         string(string &&s) //要开始移动资源,c++11中，将右值分为1.纯右值（10，x+t，min（x，y）），2.将亡值(自定义对象)
             : _str(nullptr), _size(0), _capacity(0)
         {
             cout << "string(string&& s) -- 移动构造" << endl;
             swap(s);
         }
-        // 移动赋值
+        // 移动赋值，移动赋值和移动构造类似，
         string &operator=(string &&s)
         {
             cout << "string& operator=(string&& s) -- 移动赋值" << endl;
@@ -375,6 +376,62 @@ bit::string func()
 
 
 #include<list>
+
+//完美转发
+//模板中的&&不代表有值引用，而是万能引用，既可以接收左值也能接收右值
+//模板的万能引用只是提供了能够同时接受左值引用和右值引用的能力
+//但是 
+void fun(int &X){cout<<"左值引用"<<endl;}
+void fun(const  int &X){cout<<"const 左值引用"<<endl;}
+void fun(int &&X){cout<<"右值引用"<<endl;}
+void fun(const int &&X){cout<<"const 右值引用"<<endl;}
+
+
+template<class T>
+void perfectforward(T&& t)
+{
+    //这里完美的t是一个右值，但是到这里它就会开一块空间，保存t，t就变成了一个左值
+    //属性发生了变化，所以全部都到左值引用上面去了
+
+
+    //完美转发就是可以保存它的属性，
+    fun(forward<T>(t));//t原来是右值，现在还是右值，所以如果是右值，接下来还要调用这个右值作为函数的参数的话，前面就是加入forward,完美转发
+    //只要用到这个参数的话，需要加forward，一旦右用到右值的话，就要加一个forward
+
+    // fun(t);//这里t变成左值
+}
+int main()
+{
+    perfectforward(10);             //右值
+
+    int a;
+    perfectforward(a);              //左值
+    perfectforward(move(a));        //右值
+
+    const int b=8;
+    perfectforward(b);              //const左值，模板会推导出来const
+    perfectforward(move(b));        //const右值
+    
+    //但是都被匹配到左值上面去了，
+    
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 int main()
 {
     test1();
@@ -412,5 +469,15 @@ int main()
     cout<<endl;
     lt.push_back(bit::to_string(1234));//这里就是一个移动构造，效率就提高了，所有的插入接口都涉及移动构造
 
+
+
+
+    //
+
+
     return 0;
 }
+
+
+
+*/
