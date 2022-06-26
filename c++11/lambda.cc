@@ -17,6 +17,7 @@ void test1()
     int arr[] = {4, 1, 6, 4, 5, 6};
     sort(arr, arr + sizeof(arr) / sizeof(int), greater<int>()); //这里第三个参数调用仿函数，实现降序
 }
+
 //但是又可能要排序的顺序有很多项，我要按其中一项来排序
 struct Goods
 {
