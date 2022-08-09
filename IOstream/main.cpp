@@ -88,17 +88,17 @@ public:
 
     }
 
-     void Write_Text( ServerInfo& info)
+     void Write_Text( ServerInfo& info)//文本读写
     {
         ofstream ofs(_filename.c_str());
         //可以使用流插入<<
-        ofs << info._ip << " " << info._port<<info.d;//这样就写到文件里面去了,默认空格，换行作为分割
+        ofs << info._ip << " " << info._port;//这样就写到文件里面去了,默认空格，换行作为分割
         ofs << info.d;
     }
     void Read_Text( ServerInfo& info)
     {
         ifstream ifs(_filename.c_str());
-        //可以使用流插入<<
+        //可以使用流插入<<像正常用流一样使用
         ifs>> info._ip >> info._port;//这样就写到文件里面去了
     }
 };
