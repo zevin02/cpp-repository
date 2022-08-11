@@ -34,7 +34,7 @@ void test2()
     //加一个explicit，就不能这样了
     string s1 = "hjs"; // string的构造函数没有加explicit
     vector<string> v;
-    v.push_back("hjk"); //这也是隐式类型转换
+    v.push_back("hjk"); //这也是隐式类型转换，右值
 }
 
 void test1()

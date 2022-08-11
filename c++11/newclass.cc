@@ -4,7 +4,7 @@
 #include <vector>
 #include<map>
 using namespace std;
-
+#include<thread>
 // default强制生成默认成员函数
 //delete 禁止生成默认成员函数,单例模式，不允许拷贝，不允许赋值,只能有一个对象,在类里面也不可以使用这个默认成员函数
 //final无法被继承，无法重写
@@ -164,6 +164,9 @@ void demo()
     
     */
 }
+
+
+//thread是不允许拷贝的构造的
 
 void threads()
 {
