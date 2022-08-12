@@ -28,7 +28,7 @@ void Func(int n)
         //放在这里锁的事情和释放也有消耗，
         //对用户态的切换，要保存上下文
 
-        cout << std::this_thread::get_id() << "++x " << x << endl; //获得对应的线程id
+        cout << std::this_thread::get_id() << "++x " << x << endl; //获得对应的线程id，这里是一个结构体，因为它可以跨平台
 
         //抢到锁的人执行的指令太少了，导致另一个人刚离开回去休息又回来了，而是在这里循环等待，一直问，好了我就进去执行，（自旋锁）
         ++x;
@@ -50,42 +50,122 @@ void Func(int n)
 }
 #define Lambda
 
-#include<vector>
-
+#include <vector>
 
 void threadpool()
 {
     //实现一个线程池
     atomic<int> x(0);
     //我们实现一个n个线程都对它进行加m次
-    int n,m;
-    cin>>n>>m;
+    int n, m;
+    cin >> n >> m;
     vector<thread> vthds;
-    vthds.resize(n);//我们直接就开n个线程，用thread的默认构造函数进行初始化，无参的，就不是不运行
+    vthds.resize(n); //我们直接就开n个线程，用thread的默认构造函数进行初始化，无参的，就不是不运行
     //这里还有还可以用移动构造和移动赋值
     atomic<int> costtime(0);
-    for(size_t i=0;i<vthds.size();i++)
+    for (size_t i = 0; i < vthds.size(); i++)
     {
-        vthds[i]=thread([m,&x,&costtime](){
+        vthds[i] = thread([m, &x, &costtime]()
+                          {
             int begin=clock();
             for(int i=0;i<m;i++)
             {
                 x++;//这里的x是原子变量
             }
             int end=clock();
-            costtime+=(end-begin);
-        });//这里我们用了移动赋值，构造了一个线程对象，线程里面用的是lambda表达式
+            costtime+=(end-begin); }); //这里我们用了移动赋值，构造了一个线程对象，线程里面用的是lambda表达式
     }
-    for(auto& e:vthds)
+    for (auto &e : vthds)
     {
-        e.join();//这里必须要用&，如果不用的话，就会去掉拷贝构造，这是不允许的
+        if (e.joinable()) //判断是否可被join，
+            e.join();     //这里必须要用&，如果不用的话，就会去掉拷贝构造，这是不允许的
     }
-    cout<<x<<endl;
-    cout<<costtime<<endl;
+    cout << x << endl;
+    cout << costtime << endl;
+}
+#include <ratio>
+#include <chrono>
 
+/*
+void func(int& x)//绝对不能传左值引用
+{
+    x+=10;
+}
+*/
 
+//解决方案1
+/*
+void func(int* x)//用指针肯定是可以的
+{
+    *x+=10;
 }
 
+*/
+
+//解决方案2
+
+void func(int &x) //绝对不能传左值引用
+{
+    x += 10;
+}
+
+void vfunc(vector<int> &vt, int x, int base, mutex &mtx)
+{
+    try
+    {
+        /* code */
+        if (base == 200)
+        {
+            //对应第一个线程就让他sleep一下
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+
+        for (int i = 0; i < x; i++)
+        {
+            //用IO把速度降下来
+            mtx.lock(); //这样用锁有问题
+
+            //这个push失败之后就会抛异常
+
+            vt.push_back(i); //有线程安全的问题
+
+            //抛异常之后unlock就不会被执行了，
+            if(base==100&&i==3)
+            throw bad_alloc();
+            //这里就死锁了，
+            mtx.unlock();
+
+            //会出现死锁，在
+        }
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+        //捕捉到异常之后，把锁释放掉
+        mtx.unlock();
+    }
+}
+
+void test()
+{
+    thread t1, t2;
+    vector<int> vt;
+
+    //两个线程要用同一个锁
+    mutex mtx;
+    //这里用的匿名对象，右值引用,线程要放在里面抛异常
+    t1 = thread(vfunc, std::ref(vt), 5, 100, std::ref(mtx));  //这样是存在线程安全问题
+    t2 = thread(vfunc, std::ref(vt), 10, 200, std::ref(mtx)); //
+    //这种小程序用lambda就行了
+
+    t1.join();
+    t2.join();
+
+    for (auto e : vt)
+    {
+        cout << e << " ";
+    }
+}
 
 int main()
 {
@@ -98,7 +178,7 @@ int main()
     //     t1.join();
     //     t2.join();
     // #endif
-    threadpool();
+    // threadpool();
     // #ifdef Lambda
     // int x = 0;
     // mutex mtx;
@@ -115,7 +195,7 @@ int main()
     //     mtx.unlock();
     //     cout<<x<<endl;
     //     int end1 = clock();
-    //     costtime1 += (end1 - begin1); 
+    //     costtime1 += (end1 - begin1);
     //     cout<<costtime1<<endl;});//lambda表达式可以去处理一些小函数
     // cout << x << ":" << costtime1 << endl;
 
@@ -140,5 +220,15 @@ int main()
     // cout << x << ":" << costtime1 << endl;
 
     // #endif
+    // this_thread::sleep_for(std::chrono::)
+
+    int n = 10;
+    //严格来说thread的参数不能是左值引用，
+    //
+    // thread t1(func,&n);//这样子对n的加，不可以，传值拷贝
+    // thread t1(func, std::ref(n)); //这样弄就可以了
+    // t1.join();
+    // cout << n << endl;
+    test();
     return 0;
 }
