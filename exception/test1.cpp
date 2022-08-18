@@ -257,10 +257,28 @@ void demo3()
     ServerStart();
 }
 
+
+
+#include<vector>
+void demo4()
+{
+    try
+    {
+        vector<int> v(10,5);
+        v.resize(1000000000000);//bad_alloc
+        // v.at(10)=100;//out of range
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
+}
 int main()
 {
     // demo1();
     // demo2();
-    demo3();
+    // demo3();
+    demo4();
     return 0;
 }
