@@ -170,14 +170,45 @@ void demo3()
     cout<<f6(20)<<endl;
     //这里也能用auto进行接收
 
-    
+
 
 }
+
+void l(int& x)
+{
+    x+=2;
+    cout<<"222"<<endl;
+}
+void ll(int& x)
+{
+    x+=2;
+    cout<<"222"<<endl;
+}
+void demo4()
+{
+    int x=2;
+    function<void(int&)> s=l;
+    s(x);
+    cout<<x<<endl;
+    map<int,function<void(int&)>> opmap;
+    opmap[1]=l;
+    int m=222;
+    opmap[1](m);
+    cout<<m<<endl;
+
+    map<int,function<void(int&)>> ma={{1,ll},{2,l}};//使用初始化列表
+    ma[1](m);
+    cout<<m<<endl;
+    // cout<<ret<<endl;
+
+}
+
 
 int main()
 {
     // demo1();
     // demo2();
-    demo3();
+    // demo3();
+    demo4();
     return 0;
 }
