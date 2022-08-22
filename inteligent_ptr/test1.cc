@@ -67,8 +67,21 @@ void demo1()
 
 namespace Uni_Ptr
 {
+
+        template <class T>
+    class defult_delete
+    {
+    public:
+        void operator()(const T* ptr)
+        {
+            cout<<__LINE__<<endl;
+            cout<<"delete"<<endl;
+            delete ptr;
+        }
+    };
+    template <class T, class D=default_delete<T>>//默认释放这个类型,在模板里面调用的不是仿函数,而是对应的类型
+
     //原理简单粗暴，——防拷贝，直接不让你拷贝
-    template <class T>
     class unique_ptr
     {
     private:
@@ -84,8 +97,10 @@ namespace Uni_Ptr
         {
             if (_ptr)
             {
-                cout << "delete" << endl;
-                delete _ptr; //析构函数把他清理
+                // cout << "delete" << endl;
+                // delete _ptr; //析构函数把他清理
+                D del;
+                del(_ptr);//默认的情况就是用default_delete,
             }
         }
 
@@ -352,13 +367,42 @@ struct DeleteArray
     }
 };
 
+#include<cstdio>
+#include<stdio.h>
+struct DeleteFile
+{
+    void operator()(FILE *ptr)
+    {
+        cout << "fclose:" << endl;
+        fclose(ptr);
+    }
+};
+
+
 void demo6()
 {
     //定制删除器
     //默认情况下，智能指针在底层都是用delete
     //那么如果不是new 出来，如new[],malloc,fopen
-    unique_ptr<Date> s(new Date);
-    unique_ptr<Date, DeleteArray<Date>> s1(new Date[10]); //我们可以显示定制删除器
+    //unque_ptr是在类的模板参数里面（类型）
+    Uni_Ptr::unique_ptr<Date> s(new Date);
+    Uni_Ptr::unique_ptr<Date, DeleteArray<Date>> s1(new Date[10]); //我们可以显示定制删除器
+    Uni_Ptr::unique_ptr<FILE,DeleteFile> s2(fopen("1.txt","w"));//我们这里用fopen,要自己特制一个删除器
+
+
+    //删除器在构造函数里面给对象
+    std::shared_ptr<Date> srp(new Date);
+    std::shared_ptr<Date> srp4(new Date[10],DeleteArray<Date>());
+    
+    //使用lambda表达式就更加方便了
+
+    std::shared_ptr<Date> srp3(new Date[10],[](Date* ptr){cout<<"delete []"<<endl;
+    delete[] ptr;});
+    
+    std::shared_ptr<FILE> srp1(fopen("1.txt","w"),DeleteFile());//在构造函数里面传删除器
+    std::shared_ptr<FILE> srp2(fopen("1.txt","w"),[](FILE* ptr){fclose(ptr);});//在构造函数里面传删除器
+
+
 }
 
 int main()
