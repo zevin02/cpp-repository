@@ -148,61 +148,66 @@ void demo3()
     cout << f(10, 3) << endl;
 
     //调整参数的顺序
-    function<int(int, int)> f1 = bind(sub,placeholders::_1,placeholders::_2);//这个就是啥都没做
+    function<int(int, int)> f1 = bind(sub, placeholders::_1, placeholders::_2); //这个就是啥都没做
     cout << f1(10, 3) << endl;
-    function<int(int, int)> f3 = bind(sub,placeholders::_2,placeholders::_1);//参数顺序调换了
+    function<int(int, int)> f3 = bind(sub, placeholders::_2, placeholders::_1); //参数顺序调换了
     //这里的_1就是把原来的第一个参数换到现在的位置,_2就是把原来的第2个参数换到现在的第一个
 
     //这个就是可以把库里面的用的不习惯的函数，切换参数顺序
 
     //主要是通过绑定来进行调整参数个数
 
-
     cout << f3(10, 3) << endl;
-    function<int(subber,int, int)> f4 = &subber::Sub;
-    cout << f4(subber(),10, 3) << endl;//使用了用还要加一个对象
+    function<int(subber, int, int)> f4 = &subber::Sub;
+    cout << f4(subber(), 10, 3) << endl; //使用了用还要加一个对象
     //每次都这样用很烦
-    function<int(int, int)> f5 = bind(&subber::Sub,subber(),placeholders::_1,placeholders::_2);//这样子进行绑定，第一个参数就绑死了，使用的时候就不需要再去添加
+    function<int(int, int)> f5 = bind(&subber::Sub, subber(), placeholders::_1, placeholders::_2); //这样子进行绑定，第一个参数就绑死了，使用的时候就不需要再去添加,第一个是要绑定的成员函数，第二个是一个匿名对象，
     cout << f5(10, 3) << endl;
 
     //假如说第一个参数都是一样的
-    function<int(int)> f6=bind(&subber::Sub,subber(),100,placeholders::_1);//第一个参数都是100
-    cout<<f6(20)<<endl;
+    function<int(int)> f6 = bind(&subber::Sub, subber(), 100, placeholders::_1); //第一个参数都是100
+    cout << f6(20) << endl;
     //这里也能用auto进行接收
-
-
-
 }
+class A{
 
-void l(int& x)
+
+    public:
+    A()=default;
+void l(int &x)
 {
-    x+=2;
-    cout<<"222"<<endl;
+    x += 2;
+    cout << "222" << endl;
 }
-void ll(int& x)
+void ll(int &x)
 {
-    x+=2;
-    cout<<"222"<<endl;
+    x += 2;
+    cout << "222" << endl;
 }
+};
+#define X 10
+
 void demo4()
 {
-    int x=2;
-    function<void(int&)> s=l;
+    int x = 2;
+    function<void(int &)> s = l;
     s(x);
-    cout<<x<<endl;
-    map<int,function<void(int&)>> opmap;
-    opmap[1]=l;
-    int m=222;
+    cout << x << endl;
+    map<int, function<void(int &)>> opmap;
+    opmap[1] = l;
+    int m = 222;
     opmap[1](m);
-    cout<<m<<endl;
+    cout << m << endl;
 
-    map<int,function<void(int&)>> ma={{1,ll},{2,l}};//使用初始化列表
-    ma[1](m);
-    cout<<m<<endl;
+    map<int, function<void(int &)>> ma = {{X, ll}, {2, l}}; //使用初始化列表
+    ma[X](m);
+    cout << m << endl;
+    map<int, function<void(int &)>> lll = {
+        {X, bind(&A::ll,A(), placeholders::_1)},
+        {2, bind(&A::l,A() ,placeholders::_1)}};
+    lll[X](m);
     // cout<<ret<<endl;
-
 }
-
 
 int main()
 {
