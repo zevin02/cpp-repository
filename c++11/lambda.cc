@@ -12,6 +12,10 @@ using namespace std;
 4. 包装器
 */
 
+//在可调用对象中使用Lambda式可以简化代码（对于代码量少的就很方便）
+auto func=[](int a, int b){};//这个地方的func就像普通的函数一样使用
+func(1,2);//代码量少，很方便
+
 void test1()
 {
     int arr[] = {4, 1, 6, 4, 5, 6};
