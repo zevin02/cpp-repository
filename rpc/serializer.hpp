@@ -4,9 +4,9 @@
 #include <memory>
 #include <string>
 #include <algorithm>
-#include<iostream>
-#include<assert.h>
-#include<cstring>
+#include <iostream>
+#include <assert.h>
+#include <cstring>
 using namespace std;
 
 // 存储数据流的容器,因为数据在TCP里面是以字节流的形式来展示
@@ -53,7 +53,7 @@ private:
 static bool isLittleEndian() //如果是小端字节序的话，就返回一个小端字节序
 {
     static uint16_t flag = 1;
-    static bool little_end_flag = *((uint8_t *)&flag) == 1;
+    static bool little_end_flag = *((uint8_t *)&flag) == 1; //取对应的第一个字节，如果是1的话说明就是一个小端机
     return little_end_flag;
 }
 
@@ -76,7 +76,7 @@ public:
     }
 
     template <typename T>
-    void input_type(T t);//在类里面声明，但是在类外面定义
+    void input_type(T t); //在类里面声明，但是在类外面定义
 
     template <typename T>
     void output_type(T &t);
@@ -95,30 +95,43 @@ public:
     }
 
     template <typename Tuple, std::size_t Id>
-    void getv(Serializer &ds, Tuple &t)
-    {
-        ds >> std::get<Id>(t);
-    }
+    //用来反序列化
+    //将数据导入到特定的元组的某一个位置上
+    // Deserialize the tuple.
+    // Deserializer d{ss};
+    // getv<Tuple, 0>(d, t);将d上的数据导入到元组0号位置的数据上
+    // getv<Tuple, 1>(d, t);
 
+    void getv(Serializer &ds, Tuple &t) //反序列化serializer对象中的二进制数据，并构造该数据的tuple
+    {
+        ds >> std::get<Id>(t); //将数据导入到元组中，
+    }
+    //可变参数模板，I的
     template <typename Tuple, std::size_t... I>
+    //这个里面使用的是一个索引序列
+    //将数据全部一次性导入到一个元组中
+    //    auto result = get_tuple<Tuple>(std::make_index_sequence<size>{});//使用的是Tuple这个元组，函数参数是一个索引数组
+
     Tuple get_tuple(std::index_sequence<I...>)
     {
         Tuple t;
-        std::initializer_list<int>{(getv<Tuple, I>(*this, t), 0)...};
+        //这个地方使用了一个逗号表达式，先解析左边的每问题就直接放回左边的，如果有问题再返回右边的0
+        //相当于从元组t的第I个位置获取元素如果有问题则返回值为0
+        std::initializer_list<int>{(getv<Tuple, I>(*this, t), 0)...};//一个一个填充对应的数据，因为使用模板参数，
         return t;
     }
 
     template <typename T>
-    Serializer &operator>>(T &i)//流输出
+    Serializer &operator>>(T &i) //流输出
     {
         output_type(i);
         return *this;
     }
 
     template <typename T>
-    Serializer &operator<<(T i) //重载<<，向buffer里面添加数据
+    Serializer &operator<<(T i) //重载<<，向buffer里面添加数据,重载了流输入
     {
-        input_type(i);//根据对应的不同类型，调用对应的函数
+        input_type(i); //根据对应的不同类型，调用对应的函数
         return *this;
     }
 
@@ -136,10 +149,10 @@ public:
     }
 
 private:
-    static void byteOrder(char *s, int len)//按照字节序来插入
+    static void byteOrder(char *s, int len) //按照字节序来插入
     {
-        if (isLittleEndian())//如果当前是小端机，就需要把字符串进行反转
-            std::reverse(s, s + len);
+        if (isLittleEndian())         //如果当前是小端机，就需要把字符串进行反转
+            std::reverse(s, s + len); //小端机低位存高地址，高位存低地址
     }
 
 private:
@@ -148,53 +161,53 @@ private:
 };
 
 template <typename T>
-inline void Serializer::input_type(T v)//这个地方就是在类里面声明然后在类外面进行实现,这个一般是非字符串类型要这样做
+inline void Serializer::input_type(T v) //这个地方就是在类里面声明然后在类外面进行实现,这个一般是非字符串类型要这样做
 {
-    size_t len = sizeof(v);//获得当前v的字节数
-    char *p = reinterpret_cast<char *>(&v);//把传入进行的v强制类型转化成一个字符串
-    byteOrder(p, len);
-    input(p, len);//把数据添加到buffer中
+    size_t len = sizeof(v);                 //获得当前v的字节数
+    char *p = reinterpret_cast<char *>(&v); //把传入进行的v强制类型转化成一个字符串
+    byteOrder(p, len);                      //将数据按照符合计算机存储的格式来排序
+    input(p, len);                          //把数据添加到buffer中,
 }
 
-//偏特化，这个地方需要写一个<>
+//偏特化，这个地方需要写一个<>,针对string做一个偏特化
 template <>
-inline void Serializer::input_type(std::string v)//指定特化成什么类型
+inline void Serializer::input_type(std::string v) //指定特化成什么类型
 {
     // 先存入字符串长度，存入字符串的长度是因为在反序列化的时候，程序可以先读取字符串的长度，并且根据长度信息在二进制流中定位字符串数据
 
     uint16_t len = v.size();
-    input_type(len);//先输入字符串的长度
-    byteOrder(const_cast<char*>(v.c_str()), len);//将v按照对应的字节序列的方式进行一个转化
+    input_type(len);                               //先输入字符串的长度,都是使用前两个字节先存储字符串的长度，两个字节后才会获得对一个的数据
+    byteOrder(const_cast<char *>(v.c_str()), len); //将v按照对应的字节序列的方式进行一个转化,去除const属性
     // 将转化好在字符串放到buffer中
     input(v.c_str(), len);
 }
 
 //再进行一个偏特化
 template <>
-inline void Serializer::input_type(const char* v)
+inline void Serializer::input_type(const char *v)
 {
-    input_type<std::string>(std::string(v));//指定当前类型为string类型，进行调用
+    input_type<std::string>(std::string(v)); //指定调用string类型实现的函数
 }
 
-
 template <typename T>
-inline void Serializer::output_type(T& v)//根据buffer里面存储的数据进行一个反序列化输出
+inline void Serializer::output_type(T &v) //根据buffer里面存储的数据进行一个反序列化输出
 {
-    size_t len = sizeof(v);//先获得元素的字节大小
+    size_t len = sizeof(v); //先获得元素的字节大小
     assert(size() >= len);
-    ::memcpy(&v, data(), len);//把buffer中的数据拷贝给v
-    buffer_->offset(len);//将对应的buffer中的有变进行移动
-    byteOrder(reinterpret_cast<char*>(&v), len);//再把他根据对应的字节许转化回来,因为插入的时候就因为是小端机而反转了一次
+    ::memcpy(&v, data(), len); //把buffer中的数据拷贝给v,这个地方地区的是一个按照了小端机器存储的数据
+    buffer_->offset(len);      //将对应的buffer中的有变进行移动
+    //获得数据之后还要把数据进行一个字节序列调整
+    byteOrder(reinterpret_cast<char *>(&v), len); //再把他根据对应的字节许转化回来,因为插入的时候就因为是小端机而反转了一次
     //所以现在获得的时候也要再反转回来
 }
 
 //将输出
 template <>
-inline void Serializer::output_type(std::string& v)//将对应的流里面的字符串类型进行输出到对应的元素中
+inline void Serializer::output_type(std::string &v) //将对应的流里面的字符串类型进行输出到对应的元素中
 {
-    uint16_t strLen = 0;//获得字符串的长度
-    output_type(strLen);//递归调用
+    uint16_t strLen = 0; //获得字符串的长度
+    output_type(strLen); //先从里面获得对应的字符串长度，才能根据长度获得对应的数据
     v = std::string(data(), strLen);
     buffer_->offset(strLen);
-    byteOrder(const_cast<char*>(v.c_str()), strLen);
+    byteOrder(const_cast<char *>(v.c_str()), strLen);
 }
